@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "fitness_thoughts mobile",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "fitness_thoughts web",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d", "chrome"
+            ]
+        },
+        {
+            "name": "fitness_thoughts (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "fitness_thoughts (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
