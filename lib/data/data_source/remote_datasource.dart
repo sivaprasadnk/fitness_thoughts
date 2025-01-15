@@ -18,7 +18,11 @@ class RemoteDatasourceImpl extends RemoteDatasource {
     var json = response.data;
     var list = json['data'];
     // debugPrint("## data :$list");
-    var blogs = (list as List).map((e) => BlogModel.fromJson(e)).toList();
+    var blogs = (list as List)
+        .map((e) => BlogModel.fromJson(e))
+        .toList()
+        .where((blog) => blog.isActive == "Y")
+        .toList();
     debugPrint("## blogs length :${blogs.length}");
     return blogs;
   }

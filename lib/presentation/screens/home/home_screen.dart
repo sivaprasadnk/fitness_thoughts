@@ -18,6 +18,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = context.screenWidth;
+    double horizontalPadding = context.horizontalPadding;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -58,7 +60,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0),
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -66,7 +68,9 @@ class HomeScreen extends StatelessWidget {
               CoverImage(),
               SizedBox(height: 50),
               FeaturedPostSection(),
+              SizedBox(height: width > 945 ? 75 : 16),
               RecentPostsSection(),
+              SizedBox(height: width > 945 ? 75 : 0),
               QuoteSection(),
               FooterWidget(),
             ],

@@ -91,8 +91,8 @@ class RecentPostItem extends StatelessWidget {
                 ),
               // Spacer(),
               SizedBox(height: 24),
-              AbsorbPointer(
-                child: ReadMoreButton(),
+              ReadMoreButton(
+                absorbing: true,
               ),
             ],
           ),

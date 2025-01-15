@@ -8,40 +8,45 @@ class ReadMoreButton extends StatelessWidget {
     super.key,
     this.callback,
     this.color = Colors.black,
+    this.absorbing = false,
   });
 
   final VoidCallback? callback;
   final Color color;
+  final bool absorbing;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        if (callback != null) {
-          callback!.call();
-        }
-        await locator<GetRecentPosts>().call();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 0),
-            child: Text(
-              'Read More',
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.bold,
+    return AbsorbPointer(
+      absorbing: absorbing,
+      child: GestureDetector(
+        onTap: () async {
+          if (callback != null) {
+            callback!.call();
+          }
+          await locator<GetRecentPosts>().call();
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 0),
+              child: Text(
+                'Read More',
+                style: TextStyle(
+                  color: color,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          SizedBox(width: 10),
-          Icon(
-            Icons.arrow_forward,
-            color: color,
-            size: 16,
-          )
-        ],
+            SizedBox(width: 10),
+            Icon(
+              Icons.arrow_forward,
+              color: color,
+              size: 16,
+            )
+          ],
+        ),
       ),
     ).showCursorOnHover;
   }

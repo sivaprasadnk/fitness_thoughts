@@ -17,7 +17,6 @@ class DetailsScreen extends StatelessWidget {
   final int id;
   @override
   Widget build(BuildContext context) {
-    var width = context.screenWidth;
     double padding = context.isLargeDevice ? 50 : 20;
     // var blog = blogs.where((blog) => blog.id! == id).first;
     return Scaffold(
@@ -38,7 +37,7 @@ class DetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           // padding: EdgeInsets.symmetric(horizontal: width > 945 ? 100 : 20),
-          padding: EdgeInsets.symmetric(horizontal: 0),
+          padding: EdgeInsets.symmetric(horizontal: context.horizontalPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -62,7 +61,7 @@ class DetailsScreen extends StatelessWidget {
                         blog.title!,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: context.isLargeDevice ? 48 : 24,
+                          fontSize: context.isLargeDevice ? 36 : 24,
                           fontFamily: kLoraFont,
                         ),
                       ),

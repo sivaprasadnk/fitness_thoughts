@@ -12,12 +12,8 @@ class RecentPostsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = context.screenWidth;
-    double horizontalPadding = width > 1325
-        ? 150
-        : width > 900
-            ? 100
-            : 50;
-    horizontalPadding = context.horizontalPadding;
+   
+    double horizontalPadding = context.horizontalPadding;
     var postCount = width > 1150 ? 3 : 2;
     if (context.isMobileDevice) {
       postCount = 1;
@@ -30,98 +26,91 @@ class RecentPostsSection extends StatelessWidget {
             ? (context.screenWidth - horizontalPadding * 2) / 2 - 50
             : double.infinity;
 
-    return Padding(
-      padding: EdgeInsets.only(
-        left: horizontalPadding,
-        right: horizontalPadding,
-        bottom: width > 945 ? 75 : 0,
+    return Container(
+      decoration: BoxDecoration(
+        color: kWhiteColor,
+        borderRadius: BorderRadius.circular(8),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: kWhiteColor,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SectionTitle(title: 'R E C E N T\nP O S T S'),
-            SizedBox(height: 50),
-            Consumer(builder: (context, ref, _) {
-              var provider = ref.watch(recentBlogProvider);
-              return provider.when(
-                data: (blogs) {
-                  return postCount > 1
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: blogs.take(postCount).map((blog) {
-                            return RecentPostItem(
-                              blog: blog,
-                              maxLines: 7,
-                              height: 630,
-                              showBorder: false,
-                              width: postwidth,
-                            );
-                          }).toList(),
-                        )
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: blogs.map((blog) {
-                            return RecentPostItem(
-                              blog: blog,
-                              maxLines: 7,
-                              height: 650,
-                              showBorder: false,
-                              width: postwidth,
-                            );
-                          }).toList(),
-                        );
-                },
-                error: (err, _) {
-                  return Center(
-                    child: Text(err.toString()),
-                  );
-                },
-                loading: () {
-                  return postCount > 1
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [1, 1, 1, 1].take(postCount).map((blog) {
-                            return SizedBox(
-                              height: 630,
-                              width: postwidth,
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                          }).toList(),
-                        )
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [1, 1, 1, 1].map((blog) {
-                            return SizedBox(
-                              height: 650,
-                              width: postwidth,
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                          }).toList(),
-                        );
-                },
-              );
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SectionTitle(title: 'R E C E N T\nP O S T S'),
+          SizedBox(height: 50),
+          Consumer(builder: (context, ref, _) {
+            var provider = ref.watch(recentBlogProvider);
+            return provider.when(
+              data: (blogs) {
+                return postCount > 1
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: blogs.take(postCount).map((blog) {
+                          return RecentPostItem(
+                            blog: blog,
+                            maxLines: 7,
+                            height: 630,
+                            showBorder: false,
+                            width: postwidth,
+                          );
+                        }).toList(),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: blogs.map((blog) {
+                          return RecentPostItem(
+                            blog: blog,
+                            maxLines: 7,
+                            height: 650,
+                            showBorder: false,
+                            width: postwidth,
+                          );
+                        }).toList(),
+                      );
+              },
+              error: (err, _) {
+                return Center(
+                  child: Text(err.toString()),
+                );
+              },
+              loading: () {
+                return postCount > 1
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [1, 1, 1, 1].take(postCount).map((blog) {
+                          return SizedBox(
+                            height: 630,
+                            width: postwidth,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        }).toList(),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [1, 1, 1, 1].map((blog) {
+                          return SizedBox(
+                            height: 650,
+                            width: postwidth,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        }).toList(),
+                      );
+              },
+            );
 
-              // : RecentPostItem(
-              //     blog: blogs.first,
-              //     maxLines: 7,
-              //     height: 680,
-              //     showBorder: false,
-              //     width: postwidth,
-              //   );
-            }),
-          ],
-        ),
+            // : RecentPostItem(
+            //     blog: blogs.first,
+            //     maxLines: 7,
+            //     height: 680,
+            //     showBorder: false,
+            //     width: postwidth,
+            //   );
+          }),
+        ],
       ),
     );
   }
