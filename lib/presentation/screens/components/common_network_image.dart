@@ -17,15 +17,18 @@ class CommonNetworkImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        cacheKey: imageUrl,
-        
-        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-        height: height,
-        width: width,
-        // height: 280,
-        fit: BoxFit.cover,
+      child: Hero(
+        tag: imageUrl,
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          cacheKey: imageUrl,
+
+          imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+          height: height,
+          width: width,
+          // height: 280,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

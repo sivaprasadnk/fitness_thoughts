@@ -3,6 +3,7 @@ import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
+import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -68,9 +69,10 @@ class DetailsScreen extends StatelessWidget {
                     if (blog.title != null) SizedBox(height: 32),
                     if (blog.imageAssetPath != null &&
                         blog.imageAssetPath!.isNotEmpty)
-                      Image.asset(
-                        blog.imageAssetPath!,
+                      CommonAssetImage(
+                        imagePath: blog.imageAssetPath!,
                         height: context.screenHeight * .5,
+                        width: double.infinity,
                       )
                     else if (blog.imageNetworkPath != null &&
                         blog.imageNetworkPath!.isNotEmpty)

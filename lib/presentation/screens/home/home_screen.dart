@@ -6,7 +6,6 @@ import 'package:fitness_thoughts/presentation/screens/about/about_screen.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/cover_image.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/featured_post_section.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/footer_widget.dart';
-import 'package:fitness_thoughts/presentation/screens/home/widgets/menu_icon.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/quote_section.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_posts_section.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(width: 50),
               ]
             : [
-                MenuIcon(),
+                // MenuIcon(),
                 SizedBox(width: 16),
               ],
       ),
@@ -64,9 +63,9 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 70),
+              SizedBox(height: kToolbarHeight + 20),
               CoverImage(),
-              SizedBox(height: 50),
+              SizedBox(height: 20),
               FeaturedPostSection(),
               SizedBox(height: width > 945 ? 75 : 16),
               RecentPostsSection(),
