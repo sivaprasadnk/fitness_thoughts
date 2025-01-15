@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
+import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/presentation/providers/featured_blog_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
@@ -29,7 +30,7 @@ class FeaturedPostSection extends StatelessWidget {
             return Container(
               decoration: BoxDecoration(
                 color: kWhiteColor,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(defaultBorderRadius),
               ),
               padding: EdgeInsets.all(16),
               child: Column(
@@ -66,7 +67,9 @@ class FeaturedPostSection extends StatelessWidget {
                                   Text(
                                     blog.dateString!,
                                     style: TextStyle(
-                                      color: color,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 12,
+                                      color: kGreyColor,
                                     ),
                                   ),
                                   SizedBox(height: 20),
@@ -123,7 +126,9 @@ class FeaturedPostSection extends StatelessWidget {
                     Text(
                       blog.dateString!,
                       style: TextStyle(
-                        color: color,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: kGreyColor,
                       ),
                     ),
                     SizedBox(height: 20),

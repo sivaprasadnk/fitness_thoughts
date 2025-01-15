@@ -1,4 +1,5 @@
 import 'package:fitness_thoughts/core/common_colors.dart';
+import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/presentation/providers/recent_blog_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_post_item.dart';
@@ -29,7 +30,7 @@ class RecentPostsSection extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: kWhiteColor,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(defaultBorderRadius),
       ),
       padding: EdgeInsets.all(16),
       child: Column(

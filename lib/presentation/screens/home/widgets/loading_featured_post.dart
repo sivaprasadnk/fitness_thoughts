@@ -1,4 +1,5 @@
 import 'package:fitness_thoughts/core/common_colors.dart';
+import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/section_title.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class LoadingFeaturedPost extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: kWhiteColor,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(defaultBorderRadius),
       ),
       padding: EdgeInsets.all(16),
       child: Column(

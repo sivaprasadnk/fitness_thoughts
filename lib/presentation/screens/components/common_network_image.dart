@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
+import 'package:fitness_thoughts/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class CommonNetworkImage extends StatelessWidget {
@@ -16,7 +17,7 @@ class CommonNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(defaultBorderRadius),
       child: Hero(
         tag: imageUrl,
         child: CachedNetworkImage(

@@ -1,3 +1,4 @@
+import 'package:fitness_thoughts/core/constants.dart';
 import 'package:flutter/material.dart';
 
 class CommonAssetImage extends StatelessWidget {
@@ -16,7 +17,7 @@ class CommonAssetImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(defaultBorderRadius),
       child: Hero(
         tag: imagePath,
         child: Image.asset(

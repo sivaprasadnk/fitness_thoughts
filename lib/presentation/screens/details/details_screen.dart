@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
+import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
@@ -48,7 +49,7 @@ class DetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: kWhiteColor,
-                  // border: Border.all(),
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
                 ),
                 padding: EdgeInsets.all(padding),
                 // margin: EdgeInsets.only(left: 200, right: 200),
@@ -64,6 +65,8 @@ class DetailsScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: context.isLargeDevice ? 36 : 24,
                           fontFamily: kLoraFont,
+                          color: kCustomBlueColor,
+
                         ),
                       ),
                     if (blog.title != null) SizedBox(height: 32),
@@ -91,6 +94,7 @@ class DetailsScreen extends StatelessWidget {
                           // fontWeight: FontWeight.bold,
                           // fontSize: 48,
                           fontFamily: kLoraFont,
+                          color: kCustomBlueColor,
                         ),
                       ),
                     if (blog.subTitle != null) SizedBox(height: 16),

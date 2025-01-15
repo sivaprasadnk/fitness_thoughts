@@ -75,6 +75,7 @@ class RecentPostItem extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
+                    color: kCustomBlueColor,
                   ),
                 ),
               SizedBox(height: 20),
@@ -84,6 +85,7 @@ class RecentPostItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
+                    color: kCustomBlueColor,
                   ),
                   // maxLines: 8,
                   maxLines: maxLines,
@@ -93,6 +95,8 @@ class RecentPostItem extends StatelessWidget {
               SizedBox(height: 24),
               ReadMoreButton(
                 absorbing: true,
+                color: kCustomBlueColor,
+
               ),
             ],
           ),

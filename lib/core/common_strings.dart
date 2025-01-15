@@ -4,6 +4,6 @@ const kRobotoFont = 'Roboto';
 const kLoraFont = 'Lora';
 
 ///
-const kAppName = 'FitnessThoughts';
+const kAppName = 'FitnessInThoughts';
 
 String baseUrl = 'https://fitnessblogbackend-production.up.railway.app/';
