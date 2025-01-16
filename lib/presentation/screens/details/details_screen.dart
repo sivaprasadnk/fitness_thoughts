@@ -1,4 +1,4 @@
-import 'package:auto_route/annotations.dart';
+// import 'package:auto_route/annotations.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/constants.dart';
@@ -8,15 +8,15 @@ import 'package:fitness_thoughts/presentation/screens/components/common_asset_im
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage()
+// @RoutePage()
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
     super.key,
     required this.blog,
-    @PathParam('id') required this.id,
+    // @PathParam('id') required this.id,
   });
   final BlogModel blog;
-  final int id;
+  // final int id;
   @override
   Widget build(BuildContext context) {
     double padding = context.isLargeDevice ? 50 : 20;
@@ -74,17 +74,16 @@ class DetailsScreen extends StatelessWidget {
                         blog.imageAssetPath!.isNotEmpty)
                       CommonAssetImage(
                         imagePath: blog.imageAssetPath!,
-                        height: context.screenHeight * .5,
+                        height: 280,
                         width: double.infinity,
                       )
                     else if (blog.imageNetworkPath != null &&
                         blog.imageNetworkPath!.isNotEmpty)
                       CommonNetworkImage(
                         imageUrl: blog.imageNetworkPath!,
-                        height: context.isLargeDevice
-                            ? context.screenHeight * .5
-                            : 280,
+                        height: 280,
                         width: double.infinity,
+                        blogId: blog.id!,
                       ),
                     if (blog.imageAssetPath != null) SizedBox(height: 32),
                     if (blog.subTitle != null)

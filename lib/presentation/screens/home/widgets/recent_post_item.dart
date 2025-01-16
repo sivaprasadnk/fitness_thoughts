@@ -15,20 +15,27 @@ class RecentPostItem extends StatelessWidget {
     required this.blog,
     this.width,
     this.height,
-    this.showBorder = true,
     this.maxLines,
   });
   final BlogModel blog;
   final double? width;
   final double? height;
-  final bool showBorder;
   final int? maxLines;
   @override
   Widget build(BuildContext context) {
     var showAssetImage = kIsWeb || context.isLargeDevice;
     return GestureDetector(
       onTap: () {
-        CommonFunctions.navigateToDetails(context: context, blog: blog);
+        CommonFunctions.navigateToDetails(
+          context: context,
+          blog: blog,
+        );
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (_) => DetailsScreen(
+        //               blog: blog,
+        //             )));
         // AutoRouter.of(context).push(DetailsRoute(id: blog.id!, blog: blog));
       },
       child: SizedBox(
@@ -41,17 +48,21 @@ class RecentPostItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              showAssetImage
-                  ? CommonAssetImage(
-                      imagePath: blog.imageAssetPath!,
-                      height: 280,
-                      width: double.infinity,
-                    )
-                  : CommonNetworkImage(
-                      imageUrl: blog.imageNetworkPath!,
-                      height: 280,
-                      width: double.infinity,
-                    ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: showAssetImage
+                    ? CommonAssetImage(
+                        imagePath: blog.imageAssetPath!,
+                        height: 280,
+                        width: double.infinity,
+                      )
+                    : CommonNetworkImage(
+                        imageUrl: blog.imageNetworkPath!,
+                        height: 280,
+                        width: double.infinity,
+                        blogId: blog.id!,
+                      ),
+              ),
               SizedBox(height: 20),
               if (blog.dateString != null)
                 Text(

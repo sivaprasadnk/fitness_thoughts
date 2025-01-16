@@ -9,8 +9,10 @@ class CommonNetworkImage extends StatelessWidget {
     required this.imageUrl,
     required this.height,
     required this.width,
+    required this.blogId,
   });
   final String imageUrl;
+  final int blogId;
   final double height;
   final double width;
 
@@ -18,18 +20,13 @@ class CommonNetworkImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(defaultBorderRadius),
-      child: Hero(
-        tag: imageUrl,
-        child: CachedNetworkImage(
-          imageUrl: imageUrl,
-          cacheKey: imageUrl,
-
-          imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-          height: height,
-          width: width,
-          // height: 280,
-          fit: BoxFit.cover,
-        ),
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        cacheKey: blogId.toString(),
+        imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+        height: height,
+        width: width,
+        fit: BoxFit.cover,
       ),
     );
   }

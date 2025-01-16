@@ -1,7 +1,5 @@
-import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
-import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 List<BlogModel> allBlogs = [
   BlogModel(
@@ -145,10 +143,10 @@ Tips to Improve Sleep Quality
   ),
 ];
 
-final allBlogProvider = Provider<List<BlogModel>>((ref) {
-  return allBlogs;
-});
+// final allBlogProvider = Provider<List<BlogModel>>((ref) {
+//   return allBlogs;
+// });
 
-final recentBlogProvider = FutureProvider((ref) async {
-  return await locator<GetRecentPosts>().call();
-});
+// final recentBlogProvider = FutureProvider((ref) async {
+//   return await locator<GetRecentPosts>().call();
+// });
