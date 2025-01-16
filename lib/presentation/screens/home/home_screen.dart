@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/constants.dart';
-import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/presentation/screens/about/about_screen.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/cover_image.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/featured_post_section.dart';
@@ -16,66 +15,77 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = context.screenWidth;
-    double horizontalPadding = context.horizontalPadding;
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          kAppName,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        var width = constraints.maxWidth;
+        double horizontalPadding = width > 1325
+            ? 150
+            : width > 950
+                ? 80
+                : 24;
+
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            elevation: 0,
+            centerTitle: true,
+            title: Text(
+              kAppName,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            actions: (width > mobileBreakPoint)
+                ? [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text('Home'),
+                    ),
+                    SizedBox(width: 30),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AboutScreen()));
+                      },
+                      child: Text('About'),
+                    ),
+                    SizedBox(width: 30),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text('Contact'),
+                    ),
+                    SizedBox(width: 50),
+                  ]
+                : [
+                    // MenuIcon(),
+                    SizedBox(width: 16),
+                  ],
           ),
-        ),
-        actions: (width > mobileBreakPoint)
-            ? [
-                GestureDetector(
-                  onTap: () {},
-                  child: Text('Home'),
-                ),
-                SizedBox(width: 30),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AboutScreen()));
-                  },
-                  child: Text('About'),
-                ),
-                SizedBox(width: 30),
-                GestureDetector(
-                  onTap: () {},
-                  child: Text('Contact'),
-                ),
-                SizedBox(width: 50),
-              ]
-            : [
-                // MenuIcon(),
-                SizedBox(width: 16),
-              ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: kToolbarHeight + 20),
-              CoverImage(),
-              SizedBox(height: 20),
-              FeaturedPostSection(),
-              SizedBox(height: width > 945 ? 75 : 16),
-              RecentPostsSection(),
-              SizedBox(height: width > 945 ? 75 : 0),
-              QuoteSection(),
-              FooterWidget(),
-            ],
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: kToolbarHeight + 20),
+                  CoverImage(),
+                  SizedBox(height: 20),
+                  FeaturedPostSection(),
+                  SizedBox(height: width > 945 ? 75 : 16),
+                  RecentPostsSection(),
+                  SizedBox(height: width > 945 ? 75 : 0),
+                  QuoteSection(),
+                  FooterWidget(),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

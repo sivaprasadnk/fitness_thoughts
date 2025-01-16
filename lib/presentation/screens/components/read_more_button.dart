@@ -1,6 +1,4 @@
-import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/core/utils/extensions/widget_extensions.dart';
-import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
 import 'package:flutter/material.dart';
 
 class ReadMoreButton extends StatelessWidget {
@@ -24,7 +22,7 @@ class ReadMoreButton extends StatelessWidget {
           if (callback != null) {
             callback!.call();
           }
-          await locator<GetRecentPosts>().call();
+          // await locator<GetRecentPosts>().call();
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,

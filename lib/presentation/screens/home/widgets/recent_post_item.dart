@@ -1,11 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
+import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/read_more_button.dart';
-import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -29,14 +28,12 @@ class RecentPostItem extends StatelessWidget {
     var showAssetImage = kIsWeb || context.isLargeDevice;
     return GestureDetector(
       onTap: () {
-        AutoRouter.of(context).push(DetailsRoute(id: blog.id!, blog: blog));
+        CommonFunctions.navigateToDetails(context: context, blog: blog);
+        // AutoRouter.of(context).push(DetailsRoute(id: blog.id!, blog: blog));
       },
-      child: Container(
+      child: SizedBox(
         height: height,
         width: width,
-        decoration: BoxDecoration(
-          border: showBorder ? Border.all() : null,
-        ),
         child: Padding(
           padding: const EdgeInsets.only(
             bottom: 10,
@@ -44,20 +41,17 @@ class RecentPostItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: showAssetImage
-                    ? CommonAssetImage(
-                        imagePath: blog.imageAssetPath!,
-                        height: 280,
-                        width: double.infinity,
-                      )
-                    : CommonNetworkImage(
-                        imageUrl: blog.imageNetworkPath!,
-                        height: 280,
-                        width: double.infinity,
-                      ),
-              ),
+              showAssetImage
+                  ? CommonAssetImage(
+                      imagePath: blog.imageAssetPath!,
+                      height: 280,
+                      width: double.infinity,
+                    )
+                  : CommonNetworkImage(
+                      imageUrl: blog.imageNetworkPath!,
+                      height: 280,
+                      width: double.infinity,
+                    ),
               SizedBox(height: 20),
               if (blog.dateString != null)
                 Text(
