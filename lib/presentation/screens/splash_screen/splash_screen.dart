@@ -52,6 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
       var featuredList = blogs.where((blog) => blog.isFeatured == "Y").toList();
       if (featuredList.isNotEmpty) {
         featured = featuredList.first;
+        blogs = blogs.where((blog) => blog.isFeatured! != "Y").toList();
       }
       if (context.mounted) {
 

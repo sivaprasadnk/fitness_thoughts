@@ -38,7 +38,12 @@ class DetailsScreen extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Text(kAppName),
+              child: Text(
+                kAppName,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             elevation: 0,
             scrolledUnderElevation: 0,
@@ -96,14 +101,21 @@ class DetailsScreen extends StatelessWidget {
                           Text(
                             blog.subTitle!,
                             style: TextStyle(
-                              // fontWeight: FontWeight.bold,
                               fontSize: 16,
                               fontFamily: kLoraFont,
                               color: kCustomBlueColor,
                             ),
                           ),
                         if (blog.subTitle != null) SizedBox(height: 16),
-                        if (blog.content != null) Text(blog.content!),
+                        if (blog.content != null)
+                          Text(
+                            blog.content!,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: kLoraFont,
+                              color: kCustomBlueColor,
+                            ),
+                          ),
                       ],
                     ),
                   ),

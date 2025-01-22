@@ -1,6 +1,7 @@
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/locator.dart';
+import 'package:fitness_thoughts/domain/use_case/open_localdb.dart';
 import 'package:fitness_thoughts/presentation/bloc/featured_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/bloc/recent_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/screens/splash_screen/splash_screen.dart';
@@ -8,14 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async {
   setup();
-  runApp(
-    // ProviderScope(
-    //   child: MyApp(),
-    // ),
-    MyApp(),
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  await locator<OpenLocaldb>().call();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

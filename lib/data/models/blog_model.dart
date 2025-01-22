@@ -49,4 +49,18 @@ class BlogModel {
           : [],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'subTitle': subTitle,
+      'content': content,
+      'dateString': dateString,
+      'imageAssetPath': imageAssetPath,
+      'imageNetworkPath': imageNetworkPath,
+      'isActive': isActive,
+      'isFeatured': isFeatured,
+    };
+  }
 }
