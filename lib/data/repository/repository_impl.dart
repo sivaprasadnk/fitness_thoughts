@@ -6,13 +6,13 @@ class RepositoryImpl extends Repository {
   final RemoteDatasourceImpl remoteDatasource;
   RepositoryImpl(this.remoteDatasource);
   @override
-  Future<List<BlogModel>> getRecentPosts() async {
-    var response = await remoteDatasource.getRecentPosts();
+  Future<List<BlogModel>> getPosts() async {
+    var response = await remoteDatasource.getPosts();
     return response;
   }
 
-  @override
-  Future<BlogModel> getFeaturePost() async {
-    return await remoteDatasource.getFeaturePost();
-  }
+  // @override
+  // Future<BlogModel> getFeaturePost() async {
+  //   return await remoteDatasource.getFeaturePost();
+  // }
 }

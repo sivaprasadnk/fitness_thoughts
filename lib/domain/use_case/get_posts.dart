@@ -1,10 +1,10 @@
 import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/data/repository/repository_impl.dart';
 
-class GetRecentPosts {
+class GetPosts {
   final RepositoryImpl repository;
-  GetRecentPosts(this.repository);
+  GetPosts(this.repository);
   Future<List<BlogModel>> call() async {
-    return await repository.getRecentPosts();
+    return await repository.getPosts();
   }
 }

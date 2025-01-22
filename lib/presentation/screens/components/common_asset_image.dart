@@ -18,14 +18,11 @@ class CommonAssetImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(defaultBorderRadius),
-      child: Hero(
-        tag: imagePath,
-        child: Image.asset(
-          imagePath,
-          width: width,
-          height: height,
-          fit: fit,
-        ),
+      child: Image.asset(
+        imagePath,
+        width: width,
+        height: height,
+        fit: fit,
       ),
     );
   }

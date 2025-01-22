@@ -12,6 +12,7 @@ class BlogModel {
   String? imageAssetPath;
   String? imageNetworkPath;
   String? isActive;
+  String? isFeatured;
   BlogModel({
     this.id,
     this.content = '',
@@ -23,6 +24,7 @@ class BlogModel {
     this.imageAssetPath = "",
     this.imageNetworkPath = "",
     this.isActive = 'Y',
+    this.isFeatured = 'Y',
     this.tags = const [],
   });
 
@@ -41,6 +43,7 @@ class BlogModel {
       // imageNetworkPath: json['imagePath'] ?? "",
       imageNetworkPath: json['imageNetworkPath'] ?? image,
       isActive: json['isActive'] ?? "Y",
+      isFeatured: json['isFeatured'] ?? "Y",
       tags: json['tags'] != null
           ? (json['tags'] as List).map((e) => e.toString()).toList()
           : [],

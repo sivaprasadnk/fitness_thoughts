@@ -1,8 +1,7 @@
 // import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/locator.dart';
-import 'package:fitness_thoughts/domain/use_case/get_featured_post.dart';
-import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
+import 'package:fitness_thoughts/domain/use_case/get_posts.dart';
 import 'package:fitness_thoughts/presentation/bloc/featured_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/bloc/recent_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/screens/home/home_screen.dart';
@@ -28,10 +27,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   navigate(BuildContext context) async {
-    var blog = await locator<GetFeaturedPost>().call();
-    var blogs = await locator<GetRecentPosts>().call();
+    var blogs = await locator<GetPosts>().call();
+    var featured = blogs.first;
+    var featuredList = blogs.where((blog) => blog.isFeatured == "Y").toList();
+    if (featuredList.isNotEmpty) {
+      featured = featuredList.first;
+    }
     if (context.mounted) {
-      context.read<FeaturedBlogCubit>().update(blog);
+      context.read<FeaturedBlogCubit>().update(featured);
       context.read<RecentBlogCubit>().update(blogs);
       Navigator.pop(context);
       Navigator.push(
