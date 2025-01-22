@@ -89,7 +89,6 @@ class RecentPostItem extends StatelessWidget {
                   blog.subTitle!,
                   style: TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.normal,
                     color: kCustomBlueColor,
                   ),
                   // maxLines: 8,

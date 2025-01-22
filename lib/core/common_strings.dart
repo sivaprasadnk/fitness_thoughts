@@ -4,6 +4,8 @@ const kRobotoFont = 'Roboto';
 const kLoraFont = 'Lora';
 
 ///
-const kAppName = 'FitnessInThoughts';
+const kAppName = 'Fitness in Thoughts';
+
+const kPlayStoreIconAssetPath = 'assets/images/play_store_icon.png';
 
 String baseUrl = 'https://fitnessblogbackend-production.up.railway.app/';
