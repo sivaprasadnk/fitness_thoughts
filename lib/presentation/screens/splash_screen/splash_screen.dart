@@ -45,26 +45,33 @@ class _SplashScreenState extends State<SplashScreen> {
       showUpdateText = true;
       setState(() {});
     } else {
-
       setState(() {});
       var blogs = await locator<GetPosts>().call();
-      var featured = blogs.first;
-      var featuredList = blogs.where((blog) => blog.isFeatured == "Y").toList();
-      if (featuredList.isNotEmpty) {
-        featured = featuredList.first;
-        blogs = blogs.where((blog) => blog.isFeatured! != "Y").toList();
-      }
-      if (context.mounted) {
+      if (blogs.isNotEmpty) {
+        var featured = blogs.first;
+        var featuredList = blogs.where((blog) => blog.isFeatured!).toList();
+        if (featuredList.isNotEmpty) {
+          featured = featuredList.first;
+          blogs = blogs.where((blog) => blog.isFeatured! != true).toList();
+        }
+        if (context.mounted) {
+          showUpdateText = false;
 
-        showUpdateText = false;
-
-        context.read<FeaturedBlogCubit>().update(featured);
-        context.read<RecentBlogCubit>().update(blogs);
-        Navigator.pop(context);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
-        // AutoRouter.of(context).popForced();
-        // AutoRouter.of(context).push(HomeRoute());
+          context.read<FeaturedBlogCubit>().update(featured);
+          context.read<RecentBlogCubit>().update(blogs);
+          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          // AutoRouter.of(context).popForced();
+          // AutoRouter.of(context).push(HomeRoute());
+        }
+      } else {
+        const snackBar = SnackBar(
+          content: Text('No internet connection. Please try again !'),
+        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       }
     }
   }

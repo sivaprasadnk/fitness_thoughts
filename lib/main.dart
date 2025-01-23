@@ -1,7 +1,6 @@
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/locator.dart';
-import 'package:fitness_thoughts/domain/use_case/open_localdb.dart';
 import 'package:fitness_thoughts/presentation/bloc/featured_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/bloc/recent_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/screens/splash_screen/splash_screen.dart';
@@ -12,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   setup();
   WidgetsFlutterBinding.ensureInitialized();
-  await locator<OpenLocaldb>().call();
+  // await locator<OpenLocaldb>().call();
   runApp(MyApp());
 }
 

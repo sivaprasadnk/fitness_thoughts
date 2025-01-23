@@ -15,16 +15,22 @@ class RemoteDatasourceImpl extends RemoteDatasource {
 
   @override
   Future<List<BlogModel>> getPosts() async {
-    var url = '${baseUrl}posts';
+    var url = '${baseUrl}blogs';
     var response = await dio.getUri(Uri.parse(url));
-    var json = response.data;
-    var list = json['data'];
-    // debugPrint("## data :$list");
-    var blogs = (list as List)
+    // var json = response.data;
+
+    var blogs = (response.data as List)
         .map((e) => BlogModel.fromJson(e))
         .toList()
-        .where((blog) => blog.isActive == "Y")
+        .where((blog) => blog.isActive!)
         .toList();
+
+    // debugPrint("## data :$list");
+    // var blogs = (list as List)
+    //     .map((e) => BlogModel.fromJson(e))
+    //     .toList()
+    //     .where((blog) => blog.isActive == "Y")
+    //     .toList();
     debugPrint("## blogs length :${blogs.length}");
     return blogs;
   }
