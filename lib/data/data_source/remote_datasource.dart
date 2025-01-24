@@ -1,8 +1,10 @@
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
+import 'dart:convert';
+
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/data/models/version_model.dart';
-import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 abstract class RemoteDatasource {
   Future<List<BlogModel>> getPosts();
@@ -11,44 +13,31 @@ abstract class RemoteDatasource {
 }
 
 class RemoteDatasourceImpl extends RemoteDatasource {
-  Dio dio = Dio();
-
+final http.Client client;
+  RemoteDatasourceImpl(this.client);
   @override
   Future<List<BlogModel>> getPosts() async {
     var url = '${baseUrl}blogs';
-    var response = await dio.getUri(Uri.parse(url));
-    // var json = response.data;
+    var response = await client.get(Uri.parse(url));
 
-    var blogs = (response.data as List)
+    var blogs = (jsonDecode(response.body) as List)
         .map((e) => BlogModel.fromJson(e))
         .toList()
         .where((blog) => blog.isActive!)
         .toList();
-
-    // debugPrint("## data :$list");
-    // var blogs = (list as List)
-    //     .map((e) => BlogModel.fromJson(e))
-    //     .toList()
-    //     .where((blog) => blog.isActive == "Y")
-    //     .toList();
-    debugPrint("## blogs length :${blogs.length}");
     return blogs;
   }
   
   @override
   Future<VersionModel> getLatestVersion() async {
     var url = '${baseUrl}version';
-    var response = await dio.getUri(Uri.parse(url));
-    debugPrint("version response :${response.data}");
+    var response = await client.get(Uri.parse(url));
     var list =
-        (response.data as List).map((e) => VersionModel.fromJson(e)).toList();
+        (jsonDecode(response.body) as List)
+        .map((e) => VersionModel.fromJson(e))
+        .toList();
+
     return list.firstWhere((e) => e.isLatest!);
   }
 
-  // @override
-  // Future<BlogModel> getFeaturePost() async {
-  //   var url = '${baseUrl}featured-post';
-  //   var response = await dio.getUri(Uri.parse(url));
-  //   return BlogModel.fromJson(response.data['data']);
-  // }
 }
