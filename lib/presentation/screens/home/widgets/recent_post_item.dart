@@ -7,6 +7,7 @@ import 'package:fitness_thoughts/presentation/screens/components/common_network_
 import 'package:fitness_thoughts/presentation/screens/components/read_more_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 // import 'package:universal_html/html.dart' as html;
 class RecentPostItem extends StatelessWidget {
@@ -85,15 +86,16 @@ class RecentPostItem extends StatelessWidget {
                 ),
               SizedBox(height: 20),
               if (blog.subTitle != null)
-                Text(
-                  blog.subTitle!,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: kCustomBlueColor,
-                  ),
-                  // maxLines: 8,
-                  maxLines: maxLines,
-                  overflow: TextOverflow.ellipsis,
+                MarkdownBody(
+                  data: blog.subTitle!,
+
+                  // style: TextStyle(
+                  //   fontSize: 16,
+                  //   color: kCustomBlueColor,
+                  // ),
+                  // // maxLines: 8,
+                  // maxLines: maxLines,
+                  // overflow: TextOverflow.ellipsis,
                 ),
               // Spacer(),
               SizedBox(height: 24),

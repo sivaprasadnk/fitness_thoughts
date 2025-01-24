@@ -8,7 +8,8 @@ import 'package:fitness_thoughts/presentation/screens/components/common_asset_im
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown/markdown.dart' as md;
 // @RoutePage()
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
@@ -68,18 +69,21 @@ class DetailsScreen extends StatelessWidget {
                     padding: EdgeInsets.all(padding),
                     // margin: EdgeInsets.only(left: 200, right: 200),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (blog.dateString != null) Text(blog.dateString!),
+                        if (blog.dateString != null)
+                          Center(child: Text(blog.dateString!)),
                         if (blog.dateString != null) SizedBox(height: 16),
                         if (blog.title != null)
-                          Text(
-                            blog.title!,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: context.isLargeDevice ? 36 : 24,
-                              fontFamily: kLoraFont,
-                              color: kCustomBlueColor,
+                          Center(
+                            child: Text(
+                              blog.title!,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: context.isLargeDevice ? 24 : 24,
+                                fontFamily: kLoraFont,
+                                color: kCustomBlueColor,
+                              ),
                             ),
                           ),
                         if (blog.title != null) SizedBox(height: 32),
@@ -98,23 +102,30 @@ class DetailsScreen extends StatelessWidget {
                           ),
                         if (blog.imageAssetPath != null) SizedBox(height: 32),
                         if (blog.subTitle != null)
-                          Text(
-                            blog.subTitle!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: kLoraFont,
-                              color: kCustomBlueColor,
-                            ),
+                          MarkdownBody(
+                            data: blog.subTitle!,
+                            // style: TextStyle(
+                            //   fontSize: 16,
+                            //   fontFamily: kLoraFont,
+                            //   color: kCustomBlueColor,
+                            // ),
                           ),
                         if (blog.subTitle != null) SizedBox(height: 16),
                         if (blog.content != null)
-                          Text(
-                            blog.content!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: kLoraFont,
-                              color: kCustomBlueColor,
-                            ),
+                          MarkdownBody(
+                            data: blog.content!,
+                            extensionSet: md.ExtensionSet(
+                              md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                              <md.InlineSyntax>[
+                                md.EmojiSyntax(),
+                                ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
+                              ],
+                            ),  
+                            // style: TextStyle(
+                            // fontSize: 16,
+                            // fontFamily: kLoraFont,
+                            // color: kCustomBlueColor,
+                            // ),
                           ),
                       ],
                     ),
