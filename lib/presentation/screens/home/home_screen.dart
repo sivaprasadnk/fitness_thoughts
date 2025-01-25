@@ -1,6 +1,4 @@
 import 'package:fitness_thoughts/core/common_strings.dart';
-import 'package:fitness_thoughts/core/constants.dart';
-import 'package:fitness_thoughts/presentation/screens/about/about_screen.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/cover_image.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/featured_post_section.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/quote_section.dart';
@@ -33,30 +31,7 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            actions: (width > mobileBreakPoint)
-                ? [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text('Home'),
-                    ),
-                    SizedBox(width: 30),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AboutScreen()));
-                      },
-                      child: Text('About'),
-                    ),
-                    SizedBox(width: 30),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text('Contact'),
-                    ),
-                    SizedBox(width: 50),
-                  ]
-                : [
+            actions: [
                     // MenuIcon(),
                     SizedBox(width: 16),
                   ],

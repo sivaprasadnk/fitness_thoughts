@@ -51,6 +51,7 @@ class RecentPostsSection extends StatelessWidget {
               children: [
                 SectionTitle(title: 'R E C E N T\nP O S T S'),
                 SizedBox(height: 50),
+                if (postCount == 1)
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
@@ -65,6 +66,22 @@ class RecentPostsSection extends StatelessWidget {
                       width: postWidth,
                     );
                   },
+                  )
+                else
+                  Row(
+                    children: blogs.take(postCount).map((blog) {
+                      return Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RecentPostItem(
+                            blog: blog,
+                            width: postWidth,
+                            maxLines: 5,
+                            height: 650,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                 ),
               ],
             );

@@ -25,6 +25,7 @@ final http.Client client;
         .toList()
         .where((blog) => blog.isActive!)
         .toList();
+    blogs.sort((a, b) => a.id!.compareTo(b.id!));    
     return blogs;
   }
   

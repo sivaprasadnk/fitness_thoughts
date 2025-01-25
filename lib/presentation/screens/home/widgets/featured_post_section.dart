@@ -90,10 +90,10 @@ class FeaturedPostSection extends StatelessWidget {
                                   fontSize: 16,
                                   color: color,
                                 ),
-                                maxLines: width < 1100 ? 6 : 10,
+                                maxLines: width < 1100 ? 6 : 6,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Spacer(),
+                              // Spacer(),
                               ReadMoreButton(
                                 color: color,
                                 callback: () {
@@ -158,7 +158,7 @@ class FeaturedPostSection extends StatelessWidget {
                     fontSize: 16,
                     color: color,
                   ),
-                  maxLines: width < 1100 ? 6 : 10,
+                  maxLines: width < 1100 ? 6 : 6,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 20),
