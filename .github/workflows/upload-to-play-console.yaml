@@ -45,11 +45,19 @@ jobs:
         path: |
           build/app/outputs/bundle/release/app-release.aab
   
+    - name: Decode and Save Service Account JSON
+      run: |
+        echo "${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}" > service-account.json
+
+    - name: Verify Service Account JSON
+      run: |
+        echo "Service Account JSON Preview:"
+        head -n 5 service-account.json
 
     - name: Upload to Google Play
       uses: r0adkll/upload-google-play@v1.0.18
       with:
-        serviceAccountJson: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}  # Set this secret in your GitHub repo
+        serviceAccountJson: service-account.json  # Set this secret in your GitHub repo
         packageName: com.sptpra.fitness_thoughts  # Replace with your app's package name
         releaseFiles: build/app/outputs/bundle/release/app-release.aab  # Path to your aab
         track: production  # Can be 'alpha', 'beta', 'production', etc 
