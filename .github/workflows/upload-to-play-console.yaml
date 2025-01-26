@@ -38,7 +38,7 @@ jobs:
       run: flutter build appbundle # Builds the aap-bundle for release
 
     - name: Upload to Google Play
-      uses: r0adkll/upload-google-play@v1
+      uses: r0adkll/upload-google-play@v4
       with:
         serviceAccountJson: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}  # Set this secret in your GitHub repo
         packageName: com.sptpra.fitness_thoughts  # Replace with your app's package name
