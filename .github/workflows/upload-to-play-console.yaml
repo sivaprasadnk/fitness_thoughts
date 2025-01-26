@@ -1,0 +1,34 @@
+name: Upload Flutter APK to Google Play Console
+
+on:
+  push:
+    branches:
+      - main  # Trigger this workflow on push to the main branch
+
+jobs:
+  upload:
+    name: Build & Upload Flutter APK to Google Play Console
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.27.0'  # Use the version of Flutter you want
+
+    - name: Install dependencies
+      run: flutter pub get  # Install Flutter dependencies
+
+    - name: Build APK
+      run: flutter build apk --release  # Builds the APK for release
+
+    - name: Upload to Google Play
+      uses: r0adkll/upload-google-play-action@v1
+      with:
+        serviceAccountJson: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}  # Set this secret in your GitHub repo
+        packageName: com.sptpra.fitness_thoughts  # Replace with your app's package name
+        releaseFile: build/app/outputs/bundle/release/app-release.aab  # Path to your aab
+        track: production  # Can be 'alpha', 'beta', 'production', etc.
