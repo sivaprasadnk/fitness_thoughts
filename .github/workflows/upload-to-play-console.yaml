@@ -20,7 +20,6 @@ jobs:
         flutter-version: '3.27.0'  # Use the version of Flutter you want
 
     - name: Install dependencies
-      run: flutter clean 
       run: flutter pub get  # Install Flutter dependencies
 
         #5 Setup Keystore
