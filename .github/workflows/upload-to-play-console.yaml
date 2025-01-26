@@ -42,7 +42,7 @@ jobs:
       with:
         serviceAccountJson: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}  # Set this secret in your GitHub repo
         packageName: com.sptpra.fitness_thoughts  # Replace with your app's package name
-        releaseFile: build/app/outputs/bundle/release/app-release.aab  # Path to your aab
+        releaseFiles: build/app/outputs/bundle/release/app-release.aab  # Path to your aab
         track: production  # Can be 'alpha', 'beta', 'production', etc.
         mappingFile: app/build/outputs/mapping/release/mapping.txt
         debugSymbols: app/intermediates/merged_native_libs/release/out/lib
