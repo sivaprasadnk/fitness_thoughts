@@ -8,7 +8,7 @@ on:
 jobs:
   upload:
     name: Build & Upload Flutter APK to Google Play Console
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - name: Checkout code
@@ -36,6 +36,15 @@ jobs:
 
     - name: Build AppBundle
       run: flutter build appbundle # Builds the aap-bundle for release
+
+        #9 Upload Artifacts
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Releases
+        path: |
+          build/app/outputs/bundle/release/app-release.aab
+  
 
     - name: Upload to Google Play
       uses: r0adkll/upload-google-play@v1.0.18
