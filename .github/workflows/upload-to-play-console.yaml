@@ -22,8 +22,8 @@ jobs:
     - name: Install dependencies
       run: flutter pub get  # Install Flutter dependencies
 
-    - name: Build APK
-      run: flutter build apk --release  # Builds the APK for release
+    - name: Build AppBundle
+      run: flutter build appbundle # Builds the aap-bundle for release
 
     - name: Upload to Google Play
       uses: r0adkll/upload-google-play@v1
