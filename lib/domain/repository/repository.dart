@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 abstract class Repository {
   Future<List<BlogModel>> getPosts();
+  Future<BlogModel> getPostDetails(int id);
   Future<VersionModel> getLatestVersion();
   Future<Database> openLocalDatabase();
 }

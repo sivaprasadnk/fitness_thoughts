@@ -44,80 +44,86 @@ class FeaturedPostSection extends StatelessWidget {
               ),
               SizedBox(height: 50),
               if (width > 945)
-                SizedBox(
-                  width: double.infinity,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (blog.imageAssetPath != null &&
-                          blog.imageAssetPath!.isNotEmpty)
-                        CommonAssetImage(
-                          imagePath: blog.imageAssetPath!,
-                          height: 350,
-                          width: 450,
-                        ),
-                      SizedBox(width: 50),
-                      Expanded(
-                        child: SizedBox(
-                          height: 350,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(height: 20),
-                              Text(
-                                blog.dateString!,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 12,
-                                  color: kGreyColor,
+                GestureDetector(
+                  onTap: () async {
+                    await CommonFunctions.navigateToDetails(
+                        context: context, blog: blog);
+                  },
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (blog.imageAssetPath != null &&
+                            blog.imageAssetPath!.isNotEmpty)
+                          CommonAssetImage(
+                            imagePath: blog.imageAssetPath!,
+                            height: 350,
+                            width: 450,
+                          ),
+                        SizedBox(width: 50),
+                        Expanded(
+                          child: SizedBox(
+                            height: 350,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(height: 20),
+                                Text(
+                                  blog.dateString!,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 12,
+                                    color: kGreyColor,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                blog.title!,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                SizedBox(height: 20),
+                                Text(
+                                  blog.title!,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: color,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                  blog.subTitle!,
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: color,
+                                  ),
+                                  maxLines: width < 1100 ? 6 : 6,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                // Spacer(),
+                                ReadMoreButton(
                                   color: color,
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                blog.subTitle!,
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: color,
-                                ),
-                                maxLines: width < 1100 ? 6 : 6,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              // Spacer(),
-                              ReadMoreButton(
-                                color: color,
-                                callback: () {
-                                  CommonFunctions.navigateToDetails(
-                                    context: context,
-                                    blog: blog,
-                                  );
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (_) => DetailsScreen(
-                                  //               blog: blog,
-                                  //             )));
+                                  callback: () {
+                                    CommonFunctions.navigateToDetails(
+                                      context: context,
+                                      blog: blog,
+                                    );
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (_) => DetailsScreen(
+                                    //               blog: blog,
+                                    //             )));
 
-                                  // AutoRouter.of(context).push(DetailsRoute(
-                                  //     id: blog.id!, blog: blog));
-                                },
-                              ),
-                              SizedBox(height: 20),
-                            ],
+                                    // AutoRouter.of(context).push(DetailsRoute(
+                                    //     id: blog.id!, blog: blog));
+                                  },
+                                ),
+                                SizedBox(height: 20),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
               else ...[
@@ -127,11 +133,19 @@ class FeaturedPostSection extends StatelessWidget {
                         height: context.isLargeDevice ? 350 : 280,
                         width: context.isLargeDevice ? 450 : double.infinity,
                       )
-                    : CommonNetworkImage(
-                        imageUrl: blog.imageNetworkPath!,
-                        height: context.isLargeDevice ? 350 : 280,
-                        width: context.isLargeDevice ? 450 : double.infinity,
-                        blogId: blog.id!,
+                    : GestureDetector(
+                        onTap: () {
+                          CommonFunctions.navigateToDetails(
+                            context: context,
+                            blog: blog,
+                          );
+                        },
+                        child: CommonNetworkImage(
+                          imageUrl: blog.imageNetworkPath!,
+                          height: context.isLargeDevice ? 350 : 280,
+                          width: context.isLargeDevice ? 450 : double.infinity,
+                          blogId: blog.id!,
+                        ),
                       ),
                 SizedBox(height: 20),
                 Text(
@@ -143,23 +157,39 @@ class FeaturedPostSection extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                Text(
-                  blog.title!,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: color,
+                GestureDetector(
+                  onTap: () {
+                    CommonFunctions.navigateToDetails(
+                      context: context,
+                      blog: blog,
+                    );
+                  },
+                  child: Text(
+                    blog.title!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: color,
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
-                Text(
-                  blog.subTitle!,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: color,
+                GestureDetector(
+                  onTap: () {
+                    CommonFunctions.navigateToDetails(
+                      context: context,
+                      blog: blog,
+                    );
+                  },
+                  child: Text(
+                    blog.subTitle!,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: color,
+                    ),
+                    maxLines: width < 1100 ? 6 : 6,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: width < 1100 ? 6 : 6,
-                  overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 20),
                 ReadMoreButton(
@@ -169,13 +199,6 @@ class FeaturedPostSection extends StatelessWidget {
                       context: context,
                       blog: blog,
                     );
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (_) => DetailsScreen(blog: blog)));
-
-                    // AutoRouter.of(context)
-                    //     .push(DetailsRoute(id: blog.id!, blog: blog));
                   },
                 ),
                 SizedBox(height: 70),

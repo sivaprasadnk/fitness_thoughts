@@ -52,20 +52,20 @@ class RecentPostsSection extends StatelessWidget {
                 SectionTitle(title: 'R E C E N T\nP O S T S'),
                 SizedBox(height: 50),
                 if (postCount == 1)
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemCount: blogs.length,
-                  itemBuilder: (context, index) {
-                    var blog = blogs[index];
-                          return RecentPostItem(
-                            blog: blog,
-                            maxLines: 7,
-                            height: 650,
-                      width: postWidth,
-                    );
-                  },
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemCount: blogs.length,
+                    itemBuilder: (context, index) {
+                      var blog = blogs[index];
+                      return RecentPostItem(
+                        blog: blog,
+                        maxLines: 7,
+                        height: 670,
+                        width: postWidth,
+                      );
+                    },
                   )
                 else
                   Row(
@@ -82,7 +82,7 @@ class RecentPostsSection extends StatelessWidget {
                         ),
                       );
                     }).toList(),
-                ),
+                  ),
               ],
             );
           }),

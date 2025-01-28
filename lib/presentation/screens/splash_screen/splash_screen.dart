@@ -60,6 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
             );
           });
     } else {
+      // mainLogic({}, context);
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       version = 'v${packageInfo.version}+${packageInfo.buildNumber}';
       setState(() {});
@@ -100,6 +101,71 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     }
   }
+
+  // Future<Map<String, dynamic>> fetchData(Map<String, dynamic> params) async {
+  //   final packageInfo = await PackageInfo.fromPlatform();
+  //   final version = 'v${packageInfo.version}+${packageInfo.buildNumber}';
+
+  //   final latest = await locator<GetLatestVersionFromDb>().call();
+  //   final blogs = await locator<GetPosts>().call();
+
+  //   return {
+  //     'version': version,
+  //     'buildNumber': packageInfo.buildNumber,
+  //     'latestBuildNumber': latest.buildNumber,
+  //     'blogs': blogs,
+  //   };
+  // }
+
+  // void mainLogic(Map<String, dynamic> input, BuildContext context) async {
+  //   final data = await compute(fetchData, input);
+
+  //   final buildNumber = int.parse(data['buildNumber']);
+  //   final latestBuildNumber = data['latestBuildNumber'];
+  //   final blogs = data['blogs'] as List<BlogModel>;
+
+  //   if (latestBuildNumber > buildNumber) {
+  //     debugPrint("## newVersionAvailable!!");
+  //     if (context.mounted) {
+  //       // Set state to show the update text
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(
+  //           behavior: SnackBarBehavior.floating,
+  //           content: Text("A new version is available!"),
+  //         ),
+  //       );
+  //     }
+  //   } else {
+  //     if (blogs.isNotEmpty) {
+  //       var featured = blogs.first;
+  //       var featuredList = blogs.where((blog) => blog.isFeatured!).toList();
+  //       if (featuredList.isNotEmpty) {
+  //         featured = featuredList.first;
+  //         blogs.removeWhere((blog) => blog.isFeatured!);
+  //       }
+
+  //       if (context.mounted) {
+  //         context.read<FeaturedBlogCubit>().update(featured);
+  //         context.read<RecentBlogCubit>().update(blogs);
+  //         Navigator.pop(context);
+  //         Navigator.push(
+  //           context,
+  //           MaterialPageRoute(builder: (context) => HomeScreen()),
+  //         );
+  //       }
+  //     } else {
+  //       if (context.mounted) {
+  //         const snackBar = SnackBar(
+  //           content: Text('No internet connection. Please try again!'),
+  //         );
+  //         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //       }
+  //     }
+  //   }
+  // }
+
+
+
 
   @override
   Widget build(BuildContext context) {

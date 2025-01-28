@@ -38,6 +38,11 @@ class RepositoryImpl extends Repository {
   Future<Database> openLocalDatabase() async {
     return await localDatasource.openLocalDatabase();
   }
+  
+  @override
+  Future<BlogModel> getPostDetails(int id) async {
+    return await remoteDatasource.getPostDetails(id);
+  }
 
   // @override
   // Future<BlogModel> getFeaturePost() async {

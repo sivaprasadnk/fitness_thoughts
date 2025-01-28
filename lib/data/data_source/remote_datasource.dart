@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 abstract class RemoteDatasource {
   Future<List<BlogModel>> getPosts();
+  Future<BlogModel> getPostDetails(int id);
   Future<VersionModel> getLatestVersion();
   // Future<BlogModel> getFeaturePost();
 }
@@ -40,5 +41,11 @@ final http.Client client;
 
     return list.firstWhere((e) => e.isLatest!);
   }
-
+  
+  @override
+  Future<BlogModel> getPostDetails(int id) async {
+    var url = '${baseUrl}blog/$id';
+    var response = await client.get(Uri.parse(url));
+    return BlogModel.fromJson(jsonDecode(response.body));
+  }
 }
