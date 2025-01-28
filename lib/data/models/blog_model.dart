@@ -13,6 +13,7 @@ class BlogModel {
   String? imageNetworkPath;
   bool? isActive;
   bool? isFeatured;
+  String? cacheKey;
   BlogModel({
     this.id,
     this.content = '',
@@ -26,6 +27,7 @@ class BlogModel {
     this.isActive = true,
     this.isFeatured = false,
     this.tags = const [],
+    this.cacheKey = "",
   });
 
   factory BlogModel.fromJson(Map<String, dynamic> json) {
@@ -47,6 +49,7 @@ class BlogModel {
       tags: json['tags'] != null
           ? (json['tags'] as List).map((e) => e.toString()).toList()
           : [],
+      cacheKey: json['cache_key'] ?? json['id'].toString(),
     );
   }
 

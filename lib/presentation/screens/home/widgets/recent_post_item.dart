@@ -61,7 +61,7 @@ class RecentPostItem extends StatelessWidget {
                         imageUrl: blog.imageNetworkPath!,
                         height: 280,
                         width: double.infinity,
-                        blogId: blog.id!,
+                        cacheKey: blog.cacheKey!,
                       ),
               ),
               SizedBox(height: 20),

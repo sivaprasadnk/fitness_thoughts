@@ -12,6 +12,7 @@ import 'package:fitness_thoughts/presentation/screens/home/widgets/section_title
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FeaturedPostSection extends StatelessWidget {
@@ -88,15 +89,15 @@ class FeaturedPostSection extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: 20),
-                                Text(
-                                  blog.subTitle!,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: color,
-                                  ),
-                                  maxLines: width < 1100 ? 6 : 6,
-                                  overflow: TextOverflow.ellipsis,
+                                MarkdownBody(
+                                  data: blog.subTitle!,
+                                  // textAlign: TextAlign.justify,
+                                  // style: TextStyle(
+                                  //   fontSize: 16,
+                                  //   color: color,
+                                  // ),
+                                  // maxLines: width < 1100 ? 6 : 6,
+                                  // overflow: TextOverflow.ellipsis,
                                 ),
                                 // Spacer(),
                                 ReadMoreButton(
@@ -144,7 +145,7 @@ class FeaturedPostSection extends StatelessWidget {
                           imageUrl: blog.imageNetworkPath!,
                           height: context.isLargeDevice ? 350 : 280,
                           width: context.isLargeDevice ? 450 : double.infinity,
-                          blogId: blog.id!,
+                          cacheKey: blog.cacheKey!,
                         ),
                       ),
                 SizedBox(height: 20),
@@ -181,14 +182,8 @@ class FeaturedPostSection extends StatelessWidget {
                       blog: blog,
                     );
                   },
-                  child: Text(
-                    blog.subTitle!,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: color,
-                    ),
-                    maxLines: width < 1100 ? 6 : 6,
-                    overflow: TextOverflow.ellipsis,
+                  child: MarkdownBody(
+                    data: blog.subTitle!,
                   ),
                 ),
                 SizedBox(height: 20),

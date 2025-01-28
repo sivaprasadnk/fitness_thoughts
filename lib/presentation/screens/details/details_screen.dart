@@ -9,7 +9,6 @@ import 'package:fitness_thoughts/presentation/screens/components/common_network_
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:markdown/markdown.dart' as md;
 // @RoutePage()
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
@@ -92,13 +91,14 @@ class DetailsScreen extends StatelessWidget {
                             imagePath: blog.imageAssetPath!,
                             height: 280,
                             width: double.infinity,
+                            fit: BoxFit.contain,
                           )
                         else
                           CommonNetworkImage(
                             imageUrl: blog.imageNetworkPath!,
                             height: 280,
                             width: double.infinity,
-                            blogId: blog.id!,
+                            cacheKey: blog.cacheKey!,
                           ),
                         if (blog.imageAssetPath != null) SizedBox(height: 32),
                         if (blog.subTitle != null)
@@ -114,13 +114,13 @@ class DetailsScreen extends StatelessWidget {
                         if (blog.content != null)
                           MarkdownBody(
                             data: blog.content!,
-                            extensionSet: md.ExtensionSet(
-                              md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-                              <md.InlineSyntax>[
-                                md.EmojiSyntax(),
-                                ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
-                              ],
-                            ),  
+                            // extensionSet: md.ExtensionSet(
+                            //   md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                            //   <md.InlineSyntax>[
+                            //     md.EmojiSyntax(),
+                            //     ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
+                            //   ],
+                            // ),  
                             // style: TextStyle(
                             // fontSize: 16,
                             // fontFamily: kLoraFont,

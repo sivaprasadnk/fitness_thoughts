@@ -9,10 +9,10 @@ class CommonNetworkImage extends StatelessWidget {
     required this.imageUrl,
     required this.height,
     required this.width,
-    required this.blogId,
+    required this.cacheKey,
   });
   final String imageUrl;
-  final int blogId;
+  final String cacheKey;
   final double height;
   final double width;
 
@@ -22,7 +22,7 @@ class CommonNetworkImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(defaultBorderRadius),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
-        cacheKey: blogId.toString(),
+        cacheKey: cacheKey,
         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
         height: height,
         width: width,
