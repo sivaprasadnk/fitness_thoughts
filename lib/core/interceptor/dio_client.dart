@@ -4,6 +4,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/interceptor/retry_interceptor.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DioClient {
   final Dio _dio;
@@ -43,8 +45,26 @@ class DioClient {
     return InterceptorsWrapper(
       onError: (DioException e, handler) async {
         if (_isNetworkError(e)) {
+          Fluttertoast.showToast(
+            msg: "No internet connection. Waiting for reconnection...",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
           print("No internet connection. Waiting for reconnection...");
           await _waitForInternet();
+          Fluttertoast.showToast(
+            msg: "Internet reconnected...",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
           print("Internet reconnected. Retrying request...");
           return handler.resolve(await _dio.fetch(e.requestOptions));
         }

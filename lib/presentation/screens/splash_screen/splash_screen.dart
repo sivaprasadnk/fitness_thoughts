@@ -1,6 +1,7 @@
 // import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
+import 'package:fitness_thoughts/core/connectivity_service.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
@@ -26,11 +27,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+  late ConnectivityService _connectivityService;
   String version = "";
   bool? showUpdateText;
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      _connectivityService = ConnectivityService(_scaffoldMessengerKey);
+      _connectivityService.startListening();
       navigate(context);
     });
     super.initState();
@@ -43,12 +49,8 @@ class _SplashScreenState extends State<SplashScreen> {
           context: context,
           builder: (_) {
             return AlertDialog(
-              content: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(defaultBorderRadius)),
-                child: Text(
-                    'Download the app from PlayStore for the best experience !'),
-              ),
+              content: Text(
+                  'Download the app from PlayStore for the best experience !'),
               actions: [
                 TextButton(
                   onPressed: () async {
