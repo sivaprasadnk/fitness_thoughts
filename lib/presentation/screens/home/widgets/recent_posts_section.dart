@@ -1,17 +1,14 @@
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/constants.dart';
-import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
-import 'package:fitness_thoughts/data/models/blog_model.dart';
-import 'package:fitness_thoughts/domain/use_case/get_posts.dart';
-import 'package:fitness_thoughts/presentation/bloc/all_blog_cubit.dart';
-import 'package:fitness_thoughts/presentation/bloc/recent_blog_cubit.dart';
+import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/all_posts/all_posts_screen.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_post_item.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/section_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RecentPostsSection extends StatelessWidget {
   const RecentPostsSection({super.key});
@@ -48,8 +45,11 @@ class RecentPostsSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(defaultBorderRadius),
           ),
           padding: EdgeInsets.all(12),
-          child: BlocBuilder<RecentBlogCubit, List<BlogModel>>(
-              builder: (context, blogs) {
+          child: Consumer(builder: (context, ref, _) {
+            var blogs = ref.watch(homeScreenProvider).value;
+            if (blogs == null) {
+              return SizedBox.shrink();
+            }   
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -124,11 +124,11 @@ class RecentPostsSection extends StatelessWidget {
       // Show the loader dialog
       CommonFunctions.showLoader(context);
 
-      var blogs = await locator<GetPosts>().call();
+      // var blogs = await locator<GetPosts>().call();
       // Close the loader dialog
       if (context.mounted) {
         Navigator.pop(context); // Dismiss loader
-        context.read<AllBlogCubit>().update(blogs);
+        // context.read<AllBlogCubit>().update(blogs);
       }
 
       // Navigate to the DetailsScreen

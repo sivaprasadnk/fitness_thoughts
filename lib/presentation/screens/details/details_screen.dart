@@ -25,7 +25,7 @@ class DetailsScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         var width = constraints.maxWidth;
-        double padding = width > mobileBreakPoint ? 50 : 20;
+        // double padding = width > mobileBreakPoint ? 50 : 20;
         double horizontalPadding = width > 1325
             ? 150
             : width > 950

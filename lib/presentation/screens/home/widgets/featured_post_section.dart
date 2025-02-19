@@ -3,16 +3,16 @@ import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
-import 'package:fitness_thoughts/data/models/blog_model.dart';
-import 'package:fitness_thoughts/presentation/bloc/featured_blog_cubit.dart';
+import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/read_more_button.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/section_title.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FeaturedPostSection extends StatelessWidget {
@@ -23,12 +23,14 @@ class FeaturedPostSection extends StatelessWidget {
     debugPrint("## width :${context.screenWidth}");
     var width = context.screenWidth;
     var color = kCustomBlueColor;
-    return BlocBuilder<FeaturedBlogCubit, BlogModel?>(
+    return Consumer(
       // bloc: ,
-      builder: (context, blog) {
-        if (blog == null) {
+      builder: (context, ref, _) {
+        var blogs = ref.watch(homeScreenProvider).value;
+        if (blogs == null) {
           return SizedBox.shrink();
         }
+        var blog = blogs.firstWhere((element) => element.isFeatured!);
         return Container(
           decoration: BoxDecoration(
             color: kWhiteColor,

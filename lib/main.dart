@@ -1,12 +1,10 @@
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/locator.dart';
-import 'package:fitness_thoughts/presentation/bloc/all_blog_cubit.dart';
-import 'package:fitness_thoughts/presentation/bloc/featured_blog_cubit.dart';
-import 'package:fitness_thoughts/presentation/bloc/recent_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
@@ -23,12 +21,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => FeaturedBlogCubit()),
-        BlocProvider(create: (_) => RecentBlogCubit()),
-        BlocProvider(create: (_) => AllBlogCubit()),
-      ],
+    return ProviderScope(
+      // providers: [
+      //   BlocProvider(create: (_) => FeaturedBlogCubit()),
+      //   BlocProvider(create: (_) => RecentBlogCubit()),
+      //   BlocProvider(create: (_) => AllBlogCubit()),
+      // ],
       child: MaterialApp(
         // routerConfig: _appRouter.config(),
         // routerDelegate: _appRouter.delegate(),

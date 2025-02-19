@@ -1,6 +1,7 @@
 import 'package:fitness_thoughts/core/interceptor/dio_client.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/data/models/version_model.dart';
+import 'package:flutter/material.dart';
 // import 'package:http/http.dart' as http;
 
 abstract class RemoteDatasource {
@@ -48,13 +49,13 @@ final DioClient client;
   @override
   Future<List<BlogModel>> getRecentPosts(int count) async {
     var response = await client.getRequest('blogs/recent/$count');
-
     var blogs = (response.data as List)
         .map((e) => BlogModel.fromJson(e))
         .toList()
         .where((blog) => blog.isActive!)
         .toList();
     blogs.sort((a, b) => a.id!.compareTo(b.id!));
+    debugPrint("@@ blogs length :${blogs.length}");
     return blogs;
   }
 }
