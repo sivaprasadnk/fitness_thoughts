@@ -1,4 +1,4 @@
-name: Upload Flutter APK to Google Play Console
+name: Upload bundle to Google Play Console
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   upload:
-    name: Build & Upload Flutter APK to Google Play Console
+    name: Build & Upload bundle to Google Play Console
     runs-on: macos-latest
 
     steps:
@@ -36,9 +36,6 @@ jobs:
 
     - name: Build AppBundle
       run: flutter build appbundle # Builds the aap-bundle for release
-
-    - name: Build web
-      run: flutter build web  
 
         #9 Upload Artifacts
     - name: Upload Artifacts

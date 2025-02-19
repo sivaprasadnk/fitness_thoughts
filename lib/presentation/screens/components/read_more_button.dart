@@ -38,7 +38,7 @@ class ReadMoreButton extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Icon(
-              Icons.arrow_forward,
+              Icons.arrow_forward_rounded,
               color: color,
               size: 16,
             )

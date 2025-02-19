@@ -102,9 +102,17 @@ class RecentPostsSection extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Show all'),
-                              SizedBox(width: 8),
-                              Icon(Icons.arrow_right_alt_rounded),
+                              Text(
+                                'Show all',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Icon(
+                                Icons.arrow_right_alt_rounded,
+                                size: 16,
+                              ),
                             ],
                           ).showCursorOnHover,
                         ),
