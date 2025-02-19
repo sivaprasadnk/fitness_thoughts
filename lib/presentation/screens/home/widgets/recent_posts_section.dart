@@ -1,8 +1,13 @@
 import 'package:fitness_thoughts/core/common_colors.dart';
+import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/constants.dart';
+import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
+import 'package:fitness_thoughts/domain/use_case/get_posts.dart';
+import 'package:fitness_thoughts/presentation/bloc/all_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/bloc/recent_blog_cubit.dart';
+import 'package:fitness_thoughts/presentation/screens/all_posts/all_posts_screen.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_post_item.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/section_title.dart';
 import 'package:flutter/material.dart';
@@ -24,16 +29,16 @@ class RecentPostsSection extends StatelessWidget {
             : width > 950
                 ? 80
                 : 24;
-        var postCount = 1;
+        var crossAxisCount = 1;
         var postWidth = double.infinity;
         if (context.isLargeDevice) {
-          postCount = width > 1150 ? 3 : 2;
+          crossAxisCount = width > 1150 ? 3 : 2;
 
-          postWidth = postCount == 3
+          postWidth = crossAxisCount == 3
               ? horizontalPadding == 150
                   ? (width - (horizontalPadding * 2)) / 3 - 30
                   : (width - (horizontalPadding * 2)) / 3 - 50
-              : postCount == 2
+              : crossAxisCount == 2
                   ? (width - horizontalPadding * 2) / 2 - 50
                   : double.infinity;
         }
@@ -42,7 +47,7 @@ class RecentPostsSection extends StatelessWidget {
             color: kWhiteColor,
             borderRadius: BorderRadius.circular(defaultBorderRadius),
           ),
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(12),
           child: BlocBuilder<RecentBlogCubit, List<BlogModel>>(
               builder: (context, blogs) {
             return Column(
@@ -51,7 +56,7 @@ class RecentPostsSection extends StatelessWidget {
               children: [
                 SectionTitle(title: 'R E C E N T\nP O S T S'),
                 SizedBox(height: 50),
-                if (postCount == 1)
+                if (crossAxisCount == 1)
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -69,7 +74,7 @@ class RecentPostsSection extends StatelessWidget {
                   )
                 else
                   Row(
-                    children: blogs.take(postCount).map((blog) {
+                    children: blogs.take(crossAxisCount).map((blog) {
                       return Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -83,11 +88,64 @@ class RecentPostsSection extends StatelessWidget {
                       );
                     }).toList(),
                   ),
+                Divider(),
+                GestureDetector(
+                  onTap: () {
+                    viewAllBlogs(context);
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 25,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Show all'),
+                              SizedBox(width: 8),
+                              Icon(Icons.arrow_right_alt_rounded),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                )
               ],
             );
           }),
         );
       },
     );
+  }
+
+  Future<void> viewAllBlogs(BuildContext context) async {
+    try {
+      // Show the loader dialog
+      CommonFunctions.showLoader(context);
+
+      var blogs = await locator<GetPosts>().call();
+      // Close the loader dialog
+      if (context.mounted) {
+        Navigator.pop(context); // Dismiss loader
+        context.read<AllBlogCubit>().update(blogs);
+      }
+
+      // Navigate to the DetailsScreen
+      if (context.mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => AllPostsScreen(),
+          ),
+        );
+      }
+    } catch (err) {
+      debugPrint("## error :$err");
+      // Ensure the loader is dismissed even in case of error
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
+    }
   }
 }

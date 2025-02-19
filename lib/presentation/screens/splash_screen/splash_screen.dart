@@ -7,7 +7,7 @@ import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/core/utils/extensions/string_extensions.dart';
 import 'package:fitness_thoughts/domain/use_case/get_latest_version_from_db.dart';
-import 'package:fitness_thoughts/domain/use_case/get_posts.dart';
+import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
 import 'package:fitness_thoughts/presentation/bloc/featured_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/bloc/recent_blog_cubit.dart';
 import 'package:fitness_thoughts/presentation/screens/home/home_screen.dart';
@@ -73,7 +73,8 @@ class _SplashScreenState extends State<SplashScreen> {
         setState(() {});
       } else {
         setState(() {});
-        var blogs = await locator<GetPosts>().call();
+        var count = 5;
+        var blogs = await locator<GetRecentPosts>().call(count);
         if (blogs.isNotEmpty) {
           var featured = blogs.first;
           var featuredList = blogs.where((blog) => blog.isFeatured!).toList();

@@ -4,6 +4,7 @@ import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
+import 'package:fitness_thoughts/presentation/screens/components/common_appbar.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
 import 'package:flutter/foundation.dart';
@@ -29,30 +30,13 @@ class DetailsScreen extends StatelessWidget {
             ? 150
             : width > 950
                 ? 80
-                : 24;
+                : 16;
         return Scaffold(
-          // backgroundColor: kWhiteColor,
-          appBar: AppBar(
-            // backgroundColor: kWhiteColor,
-            title: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                kAppName,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            elevation: 0,
-            scrolledUnderElevation: 0,
+          appBar: CommonAppBar(
             automaticallyImplyLeading: width < mobileBreakPoint,
-            centerTitle: true,
           ),
           body: SingleChildScrollView(
             child: Padding(
-              // padding: EdgeInsets.symmetric(horizontal: width > 945 ? 100 : 20),
               padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +49,7 @@ class DetailsScreen extends StatelessWidget {
                       color: kWhiteColor,
                       borderRadius: BorderRadius.circular(defaultBorderRadius),
                     ),
-                    padding: EdgeInsets.all(padding),
+                    padding: EdgeInsets.all(12),
                     // margin: EdgeInsets.only(left: 200, right: 200),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,6 +76,7 @@ class DetailsScreen extends StatelessWidget {
                             height: 280,
                             width: double.infinity,
                             fit: BoxFit.contain,
+                            cacheHeight: 350,
                           )
                         else
                           CommonNetworkImage(

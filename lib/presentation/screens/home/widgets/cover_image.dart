@@ -15,6 +15,7 @@ class CoverImage extends StatelessWidget {
           imagePath: 'assets/images/cover2.jpg',
           height: context.isLargeDevice ? 500 : 320,
           width: double.infinity,
+          // cacheHeight: 625,
         ),
         // Container(
         //   // margin: EdgeInsets.only(

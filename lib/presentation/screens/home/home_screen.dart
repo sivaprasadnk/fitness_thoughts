@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             ? 150
             : width > 950
                 ? 80
-                : 24;
+                : 16;
         return Scaffold(
           extendBodyBehindAppBar: false,
           appBar: AppBar(

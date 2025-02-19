@@ -24,7 +24,6 @@ class RepositoryImpl extends Repository {
     try {
       return await remoteDatasource.getLatestVersion();
     } catch (err) {
-      debugPrint("## error :$err");
       return VersionModel(
         id: 0,
         versionNumber: 100,
@@ -43,9 +42,14 @@ class RepositoryImpl extends Repository {
   Future<BlogModel> getPostDetails(int id) async {
     return await remoteDatasource.getPostDetails(id);
   }
-
-  // @override
-  // Future<BlogModel> getFeaturePost() async {
-  //   return await remoteDatasource.getFeaturePost();
-  // }
+  
+  @override
+  Future<List<BlogModel>> getRecentPosts(int count) async {
+    try {
+      return await remoteDatasource.getRecentPosts(count);
+    } catch (err) {
+      debugPrint("error @getRecentPosts :$err");
+      return [];
+    }
+  }
 }

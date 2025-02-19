@@ -8,9 +8,11 @@ class CommonAssetImage extends StatelessWidget {
     required this.height,
     required this.width,
     this.fit = BoxFit.cover,
+    this.cacheHeight,
   });
   final String imagePath;
   final double height;
+  final int? cacheHeight;
   final double width;
   final BoxFit? fit;
 
@@ -22,6 +24,7 @@ class CommonAssetImage extends StatelessWidget {
         imagePath,
         width: width,
         height: height,
+        cacheHeight: cacheHeight,
         fit: fit,
       ),
     );

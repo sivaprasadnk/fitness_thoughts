@@ -56,6 +56,7 @@ class RecentPostItem extends StatelessWidget {
                         imagePath: blog.imageAssetPath!,
                         height: 280,
                         width: double.infinity,
+                        cacheHeight: 280,
                       )
                     : CommonNetworkImage(
                         imageUrl: blog.imageNetworkPath!,

@@ -34,7 +34,7 @@ class FeaturedPostSection extends StatelessWidget {
             color: kWhiteColor,
             borderRadius: BorderRadius.circular(defaultBorderRadius),
           ),
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -61,6 +61,7 @@ class FeaturedPostSection extends StatelessWidget {
                             imagePath: blog.imageAssetPath!,
                             height: 350,
                             width: 450,
+                            cacheHeight: 350,
                           ),
                         SizedBox(width: 50),
                         Expanded(
@@ -132,6 +133,7 @@ class FeaturedPostSection extends StatelessWidget {
                     ? CommonAssetImage(
                         imagePath: blog.imageAssetPath!,
                         height: context.isLargeDevice ? 350 : 280,
+                        cacheHeight: context.isLargeDevice ? 350 : 280,
                         width: context.isLargeDevice ? 450 : double.infinity,
                       )
                     : GestureDetector(
@@ -196,7 +198,7 @@ class FeaturedPostSection extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(height: 70),
+                SizedBox(height: 30),
               ],
             ],
           ),

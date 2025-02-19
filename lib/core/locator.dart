@@ -7,6 +7,7 @@ import 'package:fitness_thoughts/data/repository/repository_impl.dart';
 import 'package:fitness_thoughts/domain/use_case/get_latest_version_from_db.dart';
 import 'package:fitness_thoughts/domain/use_case/get_post_details.dart';
 import 'package:fitness_thoughts/domain/use_case/get_posts.dart';
+import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
 import 'package:get_it/get_it.dart';
 // import 'package:http/http.dart' as http;
 
@@ -26,6 +27,7 @@ void setup() {
       .registerSingleton<RepositoryImpl>(RepositoryImpl(locator(), locator()));
 
   GetIt.I.registerSingleton<GetPosts>(GetPosts(locator()));
+  GetIt.I.registerSingleton<GetRecentPosts>(GetRecentPosts(locator()));
   GetIt.I.registerSingleton<GetPostDetails>(GetPostDetails(locator()));
   
   locator.registerSingleton<GetLatestVersionFromDb>(
