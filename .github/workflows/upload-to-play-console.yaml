@@ -3,7 +3,7 @@ name: Upload Flutter APK to Google Play Console
 on:
   push:
     branches:
-      - main  # Trigger this workflow on push to the main branch
+      - production  # Trigger this workflow on push to the main branch
 
 jobs:
   upload:
