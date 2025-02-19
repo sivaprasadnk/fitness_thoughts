@@ -21,10 +21,8 @@ final DioClient client;
 
     var blogs = (response.data as List)
         .map((e) => BlogModel.fromJson(e))
-        .toList()
-        .where((blog) => blog.isActive!)
         .toList();
-    blogs.sort((a, b) => a.id!.compareTo(b.id!));    
+        
     return blogs;
   }
   
@@ -51,10 +49,7 @@ final DioClient client;
     var response = await client.getRequest('blogs/recent/$count');
     var blogs = (response.data as List)
         .map((e) => BlogModel.fromJson(e))
-        .toList()
-        .where((blog) => blog.isActive!)
         .toList();
-    blogs.sort((a, b) => a.id!.compareTo(b.id!));
     debugPrint("@@ blogs length :${blogs.length}");
     return blogs;
   }
