@@ -2,6 +2,7 @@ import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
+import 'package:fitness_thoughts/core/utils/extensions/widget_extensions.dart';
 import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/all_posts/all_posts_screen.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_post_item.dart';
@@ -105,7 +106,7 @@ class RecentPostsSection extends StatelessWidget {
                               SizedBox(width: 8),
                               Icon(Icons.arrow_right_alt_rounded),
                             ],
-                          ),
+                          ).showCursorOnHover,
                         ),
                       )
                     ],

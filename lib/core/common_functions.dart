@@ -1,6 +1,4 @@
-import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
-import 'package:fitness_thoughts/domain/use_case/get_post_details.dart';
 import 'package:fitness_thoughts/presentation/screens/details/details_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,21 +9,21 @@ class CommonFunctions {
   }) async {
     try {
       // Show the loader dialog
-      showLoader(context);
+      // showLoader(context);
 
-      // Spawn the isolate to fetch blog details
-      var blogDetails = await locator<GetPostDetails>().call(blog.id!);
-      // Close the loader dialog
-      if (context.mounted) {
-        Navigator.pop(context); // Dismiss loader
-      }
+      // // // Spawn the isolate to fetch blog details
+      // // var blogDetails = await locator<GetPostDetails>().call(blog.id!);
+      // // // Close the loader dialog
+      // if (context.mounted) {
+      //   Navigator.pop(context); // Dismiss loader
+      // }
 
       // Navigate to the DetailsScreen
       if (context.mounted) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => DetailsScreen(blog: blogDetails),
+            builder: (_) => DetailsScreen(blog: blog),
           ),
         );
       }

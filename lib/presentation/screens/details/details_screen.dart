@@ -4,12 +4,14 @@ import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
+import 'package:fitness_thoughts/presentation/providers/blog_details_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_appbar.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // @RoutePage()
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
@@ -54,7 +56,15 @@ class DetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (blog.dateString != null)
+                        Consumer(
+                          builder: (context, ref, child) {
+                            final blogDetails =
+                                ref.watch(blogDetailsProvider(blog.id!));
+                            return blogDetails.when(
+                              data: (blog) {
+                                return Column(
+                                  children: [
+                                    if (blog.dateString != null)
                           Center(child: Text(blog.dateString!)),
                         if (blog.dateString != null) SizedBox(height: 16),
                         if (blog.title != null)
@@ -112,6 +122,26 @@ class DetailsScreen extends StatelessWidget {
                             // color: kCustomBlueColor,
                             // ),
                           ),
+                                  ],
+                                );
+                              },
+                              error: (err, stack) {
+                                return Center(
+                                  child: Text(err.toString()),
+                                );
+                              },
+                              loading: () {
+                                return SizedBox(
+                                  height: context.screenHeight / 2,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        
                       ],
                     ),
                   ),
