@@ -1,7 +1,7 @@
 import 'package:fitness_thoughts/core/interceptor/dio_client.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/data/models/version_model.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 // import 'package:http/http.dart' as http;
 
 abstract class RemoteDatasource {
@@ -17,7 +17,8 @@ final DioClient client;
   @override
   Future<List<BlogModel>> getPosts() async {
     // var url = '${baseUrl}blogs';
-    var response = await client.getRequest('blogs');
+    var url = kDebugMode ? 'blogs/dev' : "blogs";
+    var response = await client.getRequest(url);
 
     var blogs = (response.data as List)
         .map((e) => BlogModel.fromJson(e))
@@ -40,13 +41,15 @@ final DioClient client;
   @override
   Future<BlogModel> getPostDetails(int id) async {
     // var url = '${baseUrl}blog/$id';
-    var response = await client.getRequest('blog/$id');
+    var url = kDebugMode ? "blog/dev/$id" : "blog/$id";
+    var response = await client.getRequest(url);
     return BlogModel.fromJson(response.data);
   }
   
   @override
   Future<List<BlogModel>> getRecentPosts(int count) async {
-    var response = await client.getRequest('blogs/recent/$count');
+    var url = kDebugMode ? "blogs/dev/recent/$count" : "blogs/recent/$count";
+    var response = await client.getRequest(url);
     var blogs = (response.data as List)
         .map((e) => BlogModel.fromJson(e))
         .toList();
