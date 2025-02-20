@@ -4,6 +4,7 @@ import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/presentation/providers/all_blog_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/components/blog_item.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_appbar.dart';
+import 'package:fitness_thoughts/presentation/screens/components/loading_shimmer.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -87,11 +88,61 @@ class AllPostsScreen extends StatelessWidget {
                                   );
                                 },
                                 loading: () {
-                                  return SizedBox(
-                                    height: context.screenHeight / 2,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
+                                  return ListView.separated(
+                                    separatorBuilder: (context, index) {
+                                      return SizedBox(height: 16);
+                                    },
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: 3,
+                                    itemBuilder: (context, index) {
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                                defaultBorderRadius),
+                                            child: LoadingShimmer(
+                                              width: double.infinity,
+                                              height: 280,
+                                            ),
+                                          ),
+                                          SizedBox(height: 20),
+                                          LoadingShimmer(
+                                            width: 75,
+                                            height: 10,
+                                          ),
+                                          SizedBox(height: 10),
+                                          LoadingShimmer(
+                                            width: double.infinity,
+                                            height: 20,
+                                          ),
+                                          SizedBox(height: 8),
+                                          LoadingShimmer(
+                                            width: double.infinity,
+                                            height: 20,
+                                          ),
+                                          SizedBox(height: 24),
+                                          LoadingShimmer(
+                                            width: double.infinity,
+                                            height: 16,
+                                          ),
+                                          SizedBox(height: 10),
+                                          LoadingShimmer(
+                                            width: double.infinity,
+                                            height: 16,
+                                          ),
+                                          SizedBox(height: 10),
+                                          LoadingShimmer(
+                                            width: double.infinity,
+                                            height: 16,
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   );
                                 },
                               );
@@ -123,9 +174,7 @@ class AllPostsScreen extends StatelessWidget {
                                     children: splitList(blogs, crossAxisCount)
                                         .map((blogg) {
                                       return Row(
-                                        children: blogg
-                                            // .take(crossAxisCount)
-                                            .map((blog) {
+                                        children: blogg.map((blog) {
                                           return Expanded(
                                             child: Padding(
                                               padding:

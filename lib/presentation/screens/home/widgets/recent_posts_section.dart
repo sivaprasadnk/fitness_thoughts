@@ -110,7 +110,7 @@ class RecentPostsSection extends StatelessWidget {
                               ),
                               SizedBox(width: 10),
                               Icon(
-                                Icons.arrow_right_alt_rounded,
+                                Icons.arrow_forward_rounded,
                                 size: 16,
                               ),
                             ],

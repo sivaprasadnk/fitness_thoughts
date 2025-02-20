@@ -8,10 +8,12 @@ import 'package:fitness_thoughts/presentation/providers/blog_details_provider.da
 import 'package:fitness_thoughts/presentation/screens/components/common_appbar.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
+import 'package:fitness_thoughts/presentation/screens/components/loading_shimmer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 // @RoutePage()
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
@@ -65,63 +67,68 @@ class DetailsScreen extends StatelessWidget {
                                 return Column(
                                   children: [
                                     if (blog.dateString != null)
-                          Center(child: Text(blog.dateString!)),
-                        if (blog.dateString != null) SizedBox(height: 16),
-                        if (blog.title != null)
-                          Center(
-                            child: Text(
-                              blog.title!,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: context.isLargeDevice ? 24 : 24,
-                                fontFamily: kLoraFont,
-                                color: kCustomBlueColor,
-                              ),
-                            ),
-                          ),
-                        if (blog.title != null) SizedBox(height: 32),
-                        if (kIsWeb || width > mobileBreakPoint)
-                          CommonAssetImage(
-                            imagePath: blog.imageAssetPath!,
-                            height: 280,
-                            width: double.infinity,
-                            fit: BoxFit.contain,
-                            cacheHeight: 350,
-                          )
-                        else
-                          CommonNetworkImage(
-                            imageUrl: blog.imageNetworkPath!,
-                            height: 280,
-                            width: double.infinity,
-                            cacheKey: blog.cacheKey!,
-                          ),
-                        if (blog.imageAssetPath != null) SizedBox(height: 32),
-                        if (blog.subTitle != null)
-                          MarkdownBody(
-                            data: blog.subTitle!,
-                            // style: TextStyle(
-                            //   fontSize: 16,
-                            //   fontFamily: kLoraFont,
-                            //   color: kCustomBlueColor,
-                            // ),
-                          ),
-                        if (blog.subTitle != null) SizedBox(height: 16),
-                        if (blog.content != null)
-                          MarkdownBody(
-                            data: blog.content!,
-                            // extensionSet: md.ExtensionSet(
-                            //   md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-                            //   <md.InlineSyntax>[
-                            //     md.EmojiSyntax(),
-                            //     ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
-                            //   ],
-                            // ),  
-                            // style: TextStyle(
-                            // fontSize: 16,
-                            // fontFamily: kLoraFont,
-                            // color: kCustomBlueColor,
-                            // ),
-                          ),
+                                      Center(child: Text(blog.dateString!)),
+                                    if (blog.dateString != null)
+                                      SizedBox(height: 16),
+                                    if (blog.title != null)
+                                      Center(
+                                        child: Text(
+                                          blog.title!,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                context.isLargeDevice ? 24 : 18,
+                                            fontFamily: kLoraFont,
+                                            color: kCustomBlueColor,
+                                          ),
+                                        ),
+                                      ),
+                                    if (blog.title != null)
+                                      SizedBox(height: 32),
+                                    if (kIsWeb || width > mobileBreakPoint)
+                                      CommonAssetImage(
+                                        imagePath: blog.imageAssetPath!,
+                                        height: 280,
+                                        width: double.infinity,
+                                        fit: BoxFit.contain,
+                                        cacheHeight: 350,
+                                      )
+                                    else
+                                      CommonNetworkImage(
+                                        imageUrl: blog.imageNetworkPath!,
+                                        height: 280,
+                                        width: double.infinity,
+                                        cacheKey: blog.cacheKey!,
+                                      ),
+                                    if (blog.imageAssetPath != null)
+                                      SizedBox(height: 32),
+                                    if (blog.subTitle != null)
+                                      MarkdownBody(
+                                        data: blog.subTitle!,
+                                        // style: TextStyle(
+                                        //   fontSize: 16,
+                                        //   fontFamily: kLoraFont,
+                                        //   color: kCustomBlueColor,
+                                        // ),
+                                      ),
+                                    if (blog.subTitle != null)
+                                      SizedBox(height: 16),
+                                    if (blog.content != null)
+                                      MarkdownBody(
+                                        data: blog.content!,
+                                        // extensionSet: md.ExtensionSet(
+                                        //   md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                                        //   <md.InlineSyntax>[
+                                        //     md.EmojiSyntax(),
+                                        //     ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
+                                        //   ],
+                                        // ),
+                                        // style: TextStyle(
+                                        // fontSize: 16,
+                                        // fontFamily: kLoraFont,
+                                        // color: kCustomBlueColor,
+                                        // ),
+                                      ),
                                   ],
                                 );
                               },
@@ -132,16 +139,74 @@ class DetailsScreen extends StatelessWidget {
                               },
                               loading: () {
                                 return SizedBox(
-                                  height: context.screenHeight / 2,
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
+                                  height: context.screenHeight,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Center(
+                                        child: LoadingShimmer(
+                                          width: 100,
+                                          height: 20,
+                                        ),
+                                      ),
+                                      SizedBox(height: 18),
+                                      Center(
+                                        child: LoadingShimmer(
+                                          width: double.infinity,
+                                          height: 20,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Center(
+                                        child: LoadingShimmer(
+                                          width: double.infinity,
+                                          height: 20,
+                                        ),
+                                      ),
+                                      SizedBox(height: 32),
+                                      if (kIsWeb || width > mobileBreakPoint)
+                                        Center(
+                                          child: LoadingShimmer(
+                                            width: double.infinity,
+                                            height: 250,
+                                          ),
+                                        )
+                                      else
+                                        Center(
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              defaultBorderRadius,
+                                            ),
+                                            child: LoadingShimmer(
+                                              width: double.infinity,
+                                              height: 250,
+                                            ),
+                                          ),
+                                        ),
+                                      SizedBox(height: 32),
+                                      Center(
+                                        child: LoadingShimmer(
+                                          width: double.infinity,
+                                          height: 20,
+                                        ),
+                                      ),
+                                      SizedBox(height: 16),
+                                      Center(
+                                        child: LoadingShimmer(
+                                          width: double.infinity,
+                                          height: 20,
+                                        ),
+                                      ),
+                                    ],
                                   ),
+                                  // child: Center(
+                                  //   child: CircularProgressIndicator(),
+                                  // ),
                                 );
                               },
                             );
                           },
                         ),
-                        
                       ],
                     ),
                   ),

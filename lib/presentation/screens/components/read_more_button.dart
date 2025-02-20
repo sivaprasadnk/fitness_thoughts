@@ -29,7 +29,7 @@ class ReadMoreButton extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 0),
               child: Text(
-                'Read More',
+                'Read more',
                 style: TextStyle(
                   color: color,
                   fontWeight: FontWeight.bold,
