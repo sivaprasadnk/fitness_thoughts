@@ -4,6 +4,7 @@ import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/presentation/providers/all_blog_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/components/blog_item.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_appbar.dart';
+import 'package:fitness_thoughts/presentation/screens/components/loading_shimmer.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -123,6 +124,8 @@ class AllPostsScreen extends StatelessWidget {
                                     children: splitList(blogs, crossAxisCount)
                                         .map((blogg) {
                                       return Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: blogg
                                             // .take(crossAxisCount)
                                             .map((blog) {
@@ -166,11 +169,64 @@ class AllPostsScreen extends StatelessWidget {
                                 },
                                 loading: () {
                                   return SizedBox(
-                                    height: 650,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  );
+                                      height: 550,
+                                      child: Row(
+                                        children: [1, 1, 1, 1]
+                                            .take(crossAxisCount)
+                                            .map((blog) {
+                                          return Expanded(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  LoadingShimmer(
+                                                    width: double.infinity,
+                                                    height: 280,
+                                                  ),
+                                                  SizedBox(height: 20),
+                                                  LoadingShimmer(
+                                                    width: 75,
+                                                    height: 10,
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  LoadingShimmer(
+                                                    width: double.infinity,
+                                                    height: 20,
+                                                  ),
+                                                  SizedBox(height: 8),
+                                                  LoadingShimmer(
+                                                    width: 75,
+                                                    height: 20,
+                                                  ),
+                                                  SizedBox(height: 20),
+                                                  LoadingShimmer(
+                                                    width: double.infinity,
+                                                    height: 20,
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  LoadingShimmer(
+                                                    width: double.infinity,
+                                                    height: 20,
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  LoadingShimmer(
+                                                    width: double.infinity,
+                                                    height: 20,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      )
+                                      // child: Center(
+                                      //   child: CircularProgressIndicator(),
+                                      // ),
+                                      );
                                 },
                               );
                             }),
