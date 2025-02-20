@@ -1,5 +1,4 @@
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +23,7 @@ class MadeWithFlutterWidget extends StatelessWidget {
             // fontWeight: FontWeight.bold,
             fontSize: size,
             color: color,
-            fontFamily: kRobotoFont,
+            // fontFamily: kRobotoFont,
           ),
         ),
         SizedBox(width: 10),
@@ -47,7 +46,7 @@ class MadeWithFlutterWidget extends StatelessWidget {
             // fontWeight: FontWeight.bold,
             fontSize: size,
             color: color,
-            fontFamily: kRobotoFont,
+            // fontFamily: kRobotoFont,
           ),
         ),
         FlutterLogo(
@@ -59,7 +58,7 @@ class MadeWithFlutterWidget extends StatelessWidget {
             // fontWeight: FontWeight.bold,
             fontSize: size,
             color: color,
-            fontFamily: kRobotoFont,
+            // fontFamily: kRobotoFont,
           ),
         ),
       ],

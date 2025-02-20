@@ -1,6 +1,7 @@
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/cover_image.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/featured_post_section.dart';
+import 'package:fitness_thoughts/presentation/screens/home/widgets/footer_widget.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/quote_section.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_posts_section.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: width > 945 ? 75 : 16),
                   RecentPostsSection(),
                   QuoteSection(),
-                  // FooterWidget(),
+                  FooterWidget(),
                 ],
               ),
             ),
