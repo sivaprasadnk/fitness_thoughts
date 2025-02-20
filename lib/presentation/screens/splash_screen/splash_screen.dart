@@ -66,6 +66,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       version = 'v${packageInfo.version}+${packageInfo.buildNumber}';
       setState(() {});
       var latest = await locator<GetLatestVersionFromDb>().call();
+      debugPrint("## latest ${latest.buildNumber}");
+
       if (latest.buildNumber! > packageInfo.buildNumber.toInt()) {
         debugPrint("## newVersionAvailable!!");
         showUpdateText = true;

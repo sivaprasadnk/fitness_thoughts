@@ -31,11 +31,11 @@ final DioClient client;
   Future<VersionModel> getLatestVersion() async {
     // var url = '${baseUrl}version';
     var response = await client.getRequest('version');
-    var list =
-        (response.data as List)
-        .map((e) => VersionModel.fromJson(e))
-        .toList();
-    return list.firstWhere((e) => e.isLatest!);
+    // var list =
+    //     (response.data as List)
+    //     .map((e) => VersionModel.fromJson(e))
+    //     .toList();
+    return VersionModel.fromJson(response.data);
   }
   
   @override
