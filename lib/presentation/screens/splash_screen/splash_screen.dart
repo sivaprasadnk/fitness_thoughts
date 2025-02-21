@@ -1,4 +1,5 @@
 // import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/connectivity_service.dart';
@@ -8,16 +9,15 @@ import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/core/utils/extensions/string_extensions.dart';
 import 'package:fitness_thoughts/domain/use_case/get_latest_version_from_db.dart';
 import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
-import 'package:fitness_thoughts/presentation/screens/home/home_screen.dart';
+import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// @RoutePage()
+@RoutePage()
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
@@ -76,8 +76,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         showUpdateText = false;
         if (context.mounted) {
           Navigator.pop(context);
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          AutoRouter.of(context).replace(HomeRoute());
+
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
         }
 
       }

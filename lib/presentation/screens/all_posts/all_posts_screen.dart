@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class AllPostsScreen extends StatelessWidget {
   const AllPostsScreen({super.key});
 
