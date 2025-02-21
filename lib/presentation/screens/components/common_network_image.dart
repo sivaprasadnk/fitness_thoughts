@@ -25,6 +25,15 @@ class CommonNetworkImage extends StatelessWidget {
         imageUrl: imageUrl,
         cacheKey: cacheKey,
         memCacheHeight: height.toInt(),
+        errorWidget: (context, url, error) {
+          return SizedBox(
+            height: height,
+            width: width,
+            child: Center(
+              child: Icon(Icons.error),
+            ),
+          );
+        },
         placeholder: (context, url) {
           return ClipRRect(
             borderRadius: BorderRadius.circular(defaultBorderRadius),
