@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
-import 'package:fitness_thoughts/presentation/screens/details/details_screen.dart';
+import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/material.dart';
 
 class CommonFunctions {
@@ -20,12 +21,13 @@ class CommonFunctions {
 
       // Navigate to the DetailsScreen
       if (context.mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => DetailsScreen(blog: blog),
-          ),
-        );
+        AutoRouter.of(context).navigate(DetailsRoute(id: blog.id!));
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (_) => DetailsScreen(blog: blog),
+        //   ),
+        // );
       }
     } catch (err) {
       debugPrint("## error :$err");

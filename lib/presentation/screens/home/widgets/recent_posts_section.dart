@@ -1,12 +1,13 @@
+import 'package:auto_route/auto_route.dart' show AutoRouter;
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/core/utils/extensions/widget_extensions.dart';
 import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
-import 'package:fitness_thoughts/presentation/screens/all_posts/all_posts_screen.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_post_item.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/section_title.dart';
+import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -142,12 +143,14 @@ class RecentPostsSection extends StatelessWidget {
 
       // Navigate to the DetailsScreen
       if (context.mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => AllPostsScreen(),
-          ),
-        );
+        AutoRouter.of(context).navigate(AllPostsRoute());
+
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (_) => AllPostsScreen(),
+        //   ),
+        // );
       }
     } catch (err) {
       debugPrint("## error :$err");

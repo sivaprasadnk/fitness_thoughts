@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/cover_image.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/featured_post_section.dart';
@@ -6,7 +7,7 @@ import 'package:fitness_thoughts/presentation/screens/home/widgets/quote_section
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_posts_section.dart';
 import 'package:flutter/material.dart';
 
-// @RoutePage()
+@RoutePage()
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

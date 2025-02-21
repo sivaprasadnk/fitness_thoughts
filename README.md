@@ -1,6 +1,6 @@
 # Fitness in Thoughts
 
-version: 1.0.0+27
+version: 1.0.1+28
 
 https://play.google.com/store/apps/details?id=com.sptpra.fitness_thoughts
 

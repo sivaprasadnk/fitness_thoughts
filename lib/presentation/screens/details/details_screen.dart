@@ -1,8 +1,8 @@
 // import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
-import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/presentation/providers/blog_details_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_appbar.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
@@ -13,15 +13,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// @RoutePage()
+@RoutePage()
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({
     super.key,
-    required this.blog,
-    // @PathParam('id') required this.id,
+    // required this.blog,
+    @PathParam('id') required this.id,
   });
-  final BlogModel blog;
-  // final int id;
+  // final BlogModel blog;
+  final int id;
   @override
   Widget build(BuildContext context) {
     // var blog = blogs.where((blog) => blog.id! == id).first;
@@ -60,7 +60,7 @@ class DetailsScreen extends StatelessWidget {
                         Consumer(
                           builder: (context, ref, child) {
                             final blogDetails =
-                                ref.watch(blogDetailsProvider(blog.id!));
+                                ref.watch(blogDetailsProvider(id));
                             return blogDetails.when(
                               data: (blog) {
                                 return Column(
