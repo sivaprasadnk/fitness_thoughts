@@ -77,13 +77,13 @@ class BlogItem extends StatelessWidget {
                 ),
               SizedBox(height: 10),
               if (blog.title != null)
-                Text(
-                  blog.title!,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: kCustomBlueColor,
-                  ),
+                MarkdownBody(
+                  data: blog.title!,
+                  // style: TextStyle(
+                  //   fontWeight: FontWeight.bold,
+                  //   fontSize: 18,
+                  //   color: kCustomBlueColor,
+                  // ),
                 ),
               SizedBox(height: 20),
               if (blog.subTitle != null)

@@ -1,6 +1,5 @@
 // import 'package:auto_route/annotations.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
-import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
@@ -72,15 +71,15 @@ class DetailsScreen extends StatelessWidget {
                                       SizedBox(height: 16),
                                     if (blog.title != null)
                                       Center(
-                                        child: Text(
-                                          blog.title!,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize:
-                                                context.isLargeDevice ? 24 : 24,
-                                            fontFamily: kLoraFont,
-                                            color: kCustomBlueColor,
-                                          ),
+                                        child: MarkdownBody(
+                                          data: blog.title!,
+                                          // style: TextStyle(
+                                          //   fontWeight: FontWeight.bold,
+                                          //   fontSize:
+                                          //       context.isLargeDevice ? 24 : 24,
+                                          //   fontFamily: kLoraFont,
+                                          //   color: kCustomBlueColor,
+                                          // ),
                                         ),
                                       ),
                                     if (blog.title != null)

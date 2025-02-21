@@ -83,13 +83,13 @@ class FeaturedPostSection extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: 20),
-                                Text(
-                                  blog.title!,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: color,
-                                  ),
+                                MarkdownBody(
+                                  data: blog.title!,
+                                  // style: TextStyle(
+                                  //   fontWeight: FontWeight.bold,
+                                  //   fontSize: 18,
+                                  //   color: color,
+                                  // ),
                                 ),
                                 SizedBox(height: 20),
                                 MarkdownBody(
@@ -169,13 +169,13 @@ class FeaturedPostSection extends StatelessWidget {
                       blog: blog,
                     );
                   },
-                  child: Text(
-                    blog.title!,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: color,
-                    ),
+                  child: MarkdownBody(
+                    data: blog.title!,
+                    // style: TextStyle(
+                    //   fontWeight: FontWeight.bold,
+                    //   fontSize: 18,
+                    //   color: color,
+                    // ),
                   ),
                 ),
                 SizedBox(height: 20),
