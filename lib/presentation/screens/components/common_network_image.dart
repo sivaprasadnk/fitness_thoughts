@@ -26,6 +26,15 @@ class CommonNetworkImage extends StatelessWidget {
         imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
         height: height,
         width: width,
+        errorWidget: (context, url, error) {
+          return SizedBox(
+            height: height,
+            width: width,
+            child: Center(
+              child: Icon(Icons.error),
+            ),
+          );
+        },
         fit: BoxFit.cover,
       ),
     );

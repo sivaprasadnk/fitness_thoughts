@@ -26,6 +26,15 @@ class CommonAssetImage extends StatelessWidget {
         height: height,
         cacheHeight: cacheHeight,
         fit: fit,
+        errorBuilder: (context, error, stackTrace) {
+          return SizedBox(
+            height: height,
+            width: width,
+            child: Center(
+              child: Icon(Icons.error),
+            ),
+          );
+        },
       ),
     );
   }
