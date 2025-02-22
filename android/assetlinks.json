@@ -1,0 +1,11 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.sptpra.fitness_thoughts",
+        "sha256_cert_fingerprints": ["46:B4:81:40:09:C3:48:15:4D:6F:3A:AD:30:45:FD:5C:E1:8E:CA:26:87:AF:E5:9C:FA:5B:5D:66:CB:5C:22:0D"]
+      }
+    }
+  ]
+  
