@@ -1,6 +1,6 @@
 # Fitness in Thoughts
 
-1.0.1+28
+1.0.1+29
 
 https://play.google.com/store/apps/details?id=com.sptpra.fitness_thoughts
 

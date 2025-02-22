@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:fitness_thoughts/core/common_strings.dart';
+import 'package:fitness_thoughts/presentation/screens/components/common_appbar.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/cover_image.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/featured_post_section.dart';
+import 'package:fitness_thoughts/presentation/screens/home/widgets/footer_widget.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/quote_section.dart';
 import 'package:fitness_thoughts/presentation/screens/home/widgets/recent_posts_section.dart';
 import 'package:flutter/material.dart';
@@ -22,21 +23,7 @@ class HomeScreen extends StatelessWidget {
                 : 16;
         return Scaffold(
           extendBodyBehindAppBar: false,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            centerTitle: true,
-            title: Text(
-              kAppName,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            actions: [
-                    // MenuIcon(),
-                    SizedBox(width: 16),
-                  ],
-          ),
+          appBar: CommonAppBar(automaticallyImplyLeading: false),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
             child: SingleChildScrollView(
@@ -51,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: width > 945 ? 75 : 16),
                   RecentPostsSection(),
                   QuoteSection(),
-                  // FooterWidget(),
+                  FooterWidget(),
                 ],
               ),
             ),

@@ -22,11 +22,23 @@ class AppRouter extends RootStackRouter {
           path: '/home',
         ),
         AutoRoute(page: DetailsRoute.page, path: '/home/blogs/:id'),
-        AutoRoute(page: AllPostsRoute.page, path: '/home/blogs/')
+        AutoRoute(page: AllPostsRoute.page, path: '/home/blogs/'),
       ];
 
   @override
   List<AutoRouteGuard> get guards => [
         // optionally add root guards here
       ];
+
+  // @override
+  // RouteType get defaultRouteType => const RouteType.material();
+
+  // @override
+  // Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+  //   // Redirect to home if the path is unknown (e.g., after refresh)
+  //   if (settings.name == null || settings.name!.isEmpty) {
+  //     return MaterialPageRoute(builder: (_) => const HomeScreen());
+  //   }
+  //   return null;
+  // }    
 }

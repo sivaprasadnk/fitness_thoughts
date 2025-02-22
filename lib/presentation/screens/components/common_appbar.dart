@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
+import 'package:fitness_thoughts/core/utils/extensions/widget_extensions.dart';
+import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/material.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,13 +20,22 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title:
-          Text(kAppName, style: const TextStyle(fontWeight: FontWeight.bold)),
+      title: GestureDetector(
+        onTap: () {
+          AutoRouter.of(context).pushAndPopUntil(HomeRoute(),
+              predicate: (route) => route.settings.name == HomeRoute.name);
+          // AutoRouter.of(context).replaceAll([const HomeRoute()]);
+        },
+        child: Text(
+          kAppName,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       elevation: 0,
       scrolledUnderElevation: 0,
       automaticallyImplyLeading: automaticallyImplyLeading,
       centerTitle: true,
-    );
+    ).showCursorOnHover;
   }
 
   @override
