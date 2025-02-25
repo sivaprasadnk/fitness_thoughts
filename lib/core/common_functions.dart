@@ -1,33 +1,43 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 
 class CommonFunctions {
   static navigateToDetails({
     required BuildContext context,
     required BlogModel blog,
+    required bool biometricsRequired,
   }) async {
     try {
-      // Show the loader dialog
-      // showLoader(context);
+      if (biometricsRequired) {
+        var auth = locator<LocalAuthentication>();
+        final List<BiometricType> availableBiometrics =
+            await auth.getAvailableBiometrics();
+        if (availableBiometrics.isNotEmpty) {
+          final bool didAuthenticate = await auth.authenticate(
+              localizedReason: 'Please authenticate to view details');
 
-      // // // Spawn the isolate to fetch blog details
-      // // var blogDetails = await locator<GetPostDetails>().call(blog.id!);
-      // // // Close the loader dialog
-      // if (context.mounted) {
-      //   Navigator.pop(context); // Dismiss loader
-      // }
-
-      // Navigate to the DetailsScreen
-      if (context.mounted) {
+          if (didAuthenticate && context.mounted) {
+            AutoRouter.of(context).navigate(DetailsRoute(id: blog.id!));
+          }
+          // Some biometrics are enrolled.
+        } else {
+          if (context.mounted) {
+            AutoRouter.of(context).navigate(DetailsRoute(id: blog.id!));
+          }
+        }
+      } else {
         AutoRouter.of(context).navigate(DetailsRoute(id: blog.id!));
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (_) => DetailsScreen(blog: blog),
-        //   ),
-        // );
+
+      }
+    } on PlatformException catch (exc) {
+      debugPrint("## PlatformException $exc");
+      if (context.mounted) {
+        Navigator.pop(context);
       }
     } catch (err) {
       debugPrint("## error :$err");

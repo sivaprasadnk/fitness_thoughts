@@ -4,6 +4,7 @@ import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
+import 'package:fitness_thoughts/presentation/providers/system_config_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_network_image.dart';
 import 'package:fitness_thoughts/presentation/screens/components/read_more_button.dart';
@@ -50,7 +51,12 @@ class FeaturedPostSection extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     await CommonFunctions.navigateToDetails(
-                        context: context, blog: blog);
+                      context: context,
+                      blog: blog,
+                      biometricsRequired:
+                          ref.read(systemConfigProvider).showBiometrics ??
+                              false,
+                    );
                   },
                   child: SizedBox(
                     width: double.infinity,
@@ -109,6 +115,10 @@ class FeaturedPostSection extends StatelessWidget {
                                     CommonFunctions.navigateToDetails(
                                       context: context,
                                       blog: blog,
+                                      biometricsRequired: ref
+                                              .read(systemConfigProvider)
+                                              .showBiometrics ??
+                                          false,
                                     );
                                     // Navigator.push(
                                     //     context,
@@ -143,6 +153,9 @@ class FeaturedPostSection extends StatelessWidget {
                           CommonFunctions.navigateToDetails(
                             context: context,
                             blog: blog,
+                            biometricsRequired:
+                                ref.read(systemConfigProvider).showBiometrics ??
+                                    false,
                           );
                         },
                         child: CommonNetworkImage(
@@ -167,6 +180,9 @@ class FeaturedPostSection extends StatelessWidget {
                     CommonFunctions.navigateToDetails(
                       context: context,
                       blog: blog,
+                      biometricsRequired:
+                          ref.read(systemConfigProvider).showBiometrics ??
+                              false,
                     );
                   },
                   child: MarkdownBody(
@@ -184,6 +200,9 @@ class FeaturedPostSection extends StatelessWidget {
                     CommonFunctions.navigateToDetails(
                       context: context,
                       blog: blog,
+                      biometricsRequired:
+                          ref.read(systemConfigProvider).showBiometrics ??
+                              false,
                     );
                   },
                   child: MarkdownBody(
@@ -197,6 +216,9 @@ class FeaturedPostSection extends StatelessWidget {
                     CommonFunctions.navigateToDetails(
                       context: context,
                       blog: blog,
+                      biometricsRequired:
+                          ref.read(systemConfigProvider).showBiometrics ??
+                              false,
                     );
                   },
                 ),

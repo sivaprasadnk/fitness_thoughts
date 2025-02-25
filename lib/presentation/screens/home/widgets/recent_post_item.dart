@@ -30,6 +30,7 @@ class RecentPostItem extends StatelessWidget {
         CommonFunctions.navigateToDetails(
           context: context,
           blog: blog,
+          biometricsRequired: false,
         );
         // Navigator.push(
         //     context,

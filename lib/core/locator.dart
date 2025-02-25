@@ -4,11 +4,12 @@ import 'package:fitness_thoughts/core/interceptor/dio_client.dart';
 import 'package:fitness_thoughts/data/data_source/local_datasource.dart';
 import 'package:fitness_thoughts/data/data_source/remote_datasource.dart';
 import 'package:fitness_thoughts/data/repository/repository_impl.dart';
-import 'package:fitness_thoughts/domain/use_case/get_latest_version_from_db.dart';
 import 'package:fitness_thoughts/domain/use_case/get_post_details.dart';
 import 'package:fitness_thoughts/domain/use_case/get_posts.dart';
 import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
+import 'package:fitness_thoughts/domain/use_case/get_system_config.dart';
 import 'package:get_it/get_it.dart';
+import 'package:local_auth/local_auth.dart';
 // import 'package:http/http.dart' as http;
 
 final locator = GetIt.instance;
@@ -16,6 +17,7 @@ final locator = GetIt.instance;
 void setup() {
   // locator.registerSingleton<http.Client>(http.Client());
   locator.registerSingleton<Dio>(Dio());
+  locator.registerSingleton<LocalAuthentication>(LocalAuthentication());
   locator.registerSingleton<Connectivity>(Connectivity());
   locator.registerSingleton<DioClient>(DioClient(locator(), locator()));
 
@@ -29,8 +31,8 @@ void setup() {
   GetIt.I.registerSingleton<GetPosts>(GetPosts(locator()));
   GetIt.I.registerSingleton<GetRecentPosts>(GetRecentPosts(locator()));
   GetIt.I.registerSingleton<GetPostDetails>(GetPostDetails(locator()));
-  
-  locator.registerSingleton<GetLatestVersionFromDb>(
-      GetLatestVersionFromDb(locator()));
 
+  // locator.registerSingleton<GetLatestVersionFromDb>(
+  //     GetLatestVersionFromDb(locator()));
+  locator.registerSingleton<GetSystemConfig>(GetSystemConfig(locator()));
 }

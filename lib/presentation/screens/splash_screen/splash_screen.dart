@@ -6,8 +6,9 @@ import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
 import 'package:fitness_thoughts/core/utils/extensions/string_extensions.dart';
-import 'package:fitness_thoughts/domain/use_case/get_latest_version_from_db.dart';
+import 'package:fitness_thoughts/domain/use_case/get_system_config.dart';
 import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
+import 'package:fitness_thoughts/presentation/providers/system_config_provider.dart';
 import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -64,8 +65,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       version = 'v${packageInfo.version}+${packageInfo.buildNumber}';
       setState(() {});
-      var latest = await locator<GetLatestVersionFromDb>().call();
+      var latest = await locator<GetSystemConfig>().call();
+      ref.read(systemConfigProvider.notifier).loadSystemConfig(latest);
+
       debugPrint("## latest ${latest.buildNumber}");
+      debugPrint("## showBiometrics ${latest.showBiometrics}");
 
       if (latest.buildNumber! > packageInfo.buildNumber.toInt()) {
         debugPrint("## newVersionAvailable!!");
@@ -82,14 +86,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           // Navigator.push(
           //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
         }
-
       }
     }
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {

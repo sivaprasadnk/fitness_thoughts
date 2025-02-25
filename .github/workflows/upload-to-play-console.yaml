@@ -35,7 +35,7 @@ jobs:
         echo "storeFile=keystore.jks" >> android/key.properties
 
     - name: Build AppBundle
-      run: flutter build appbundle # Builds the aap-bundle for release
+      run: flutter build appbundle --obfuscate # Builds the aap-bundle for release
 
         #9 Upload Artifacts
     - name: Upload Artifacts

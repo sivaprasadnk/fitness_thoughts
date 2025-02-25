@@ -1,11 +1,11 @@
-import 'package:fitness_thoughts/data/models/version_model.dart';
-import 'package:fitness_thoughts/data/repository/repository_impl.dart';
+// import 'package:fitness_thoughts/data/models/system_config_model.dart';
+// import 'package:fitness_thoughts/data/repository/repository_impl.dart';
 
-class GetLatestVersionFromDb {
-  final RepositoryImpl repository;
-  GetLatestVersionFromDb(this.repository);
+// class GetLatestVersionFromDb {
+//   final RepositoryImpl repository;
+//   GetLatestVersionFromDb(this.repository);
 
-  Future<VersionModel> call() async {
-    return await repository.getLatestVersion();
-  }
-}
+//   Future<SystemConfig> call() async {
+//     return await repository.getLatestVersion();
+//   }
+// }
