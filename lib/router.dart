@@ -3,6 +3,33 @@ import 'package:fitness_thoughts/router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
+
+  // @override
+  // RouterConfig<UrlState> config({
+  //   DeepLinkTransformer? deepLinkTransformer,
+  //   DeepLinkBuilder? deepLinkBuilder,
+  //   String? navRestorationScopeId,
+  //   WidgetBuilder? placeholder,
+  //   NavigatorObserversBuilder navigatorObservers =
+  //       AutoRouterDelegate.defaultNavigatorObserversBuilder,
+  //   bool includePrefixMatches = !kIsWeb,
+  //   bool Function(String? location)? neglectWhen,
+  //   bool rebuildStackOnDeepLink = false,
+  //   Listenable? reevaluateListenable,
+  // }) {
+  //   // TODO: implement config
+  //   return super.config(
+  //       deepLinkTransformer: deepLinkTransformer,
+  //       deepLinkBuilder: deepLinkBuilder,
+  //       navRestorationScopeId: navRestorationScopeId,
+  //       placeholder: placeholder,
+  //       navigatorObservers: navigatorObservers,
+  //       includePrefixMatches: includePrefixMatches,
+  //       neglectWhen: neglectWhen,
+  //       rebuildStackOnDeepLink: rebuildStackOnDeepLink,
+  //       reevaluateListenable: reevaluateListenable);
+  // }
+
   @override
   RouteType get defaultRouteType =>
       RouteType.adaptive(); //.cupertino, .adaptive ..etc
@@ -29,6 +56,8 @@ class AppRouter extends RootStackRouter {
   List<AutoRouteGuard> get guards => [
         // optionally add root guards here
       ];
+
+      
 
   // @override
   // RouteType get defaultRouteType => const RouteType.material();

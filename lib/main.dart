@@ -31,6 +31,14 @@ class MyApp extends StatelessWidget {
         routerConfig: _appRouter.config(),
         // routerDelegate: _appRouter.delegate(),
         // routeInformationParser: _appRouter.defaultRouteParser(),
+        // routeInformationParser: _appRouter.defaultRouteParser(),
+        // backButtonDispatcher: RootBackButtonDispatcher(),
+        // routerDelegate: _appRouter.delegate(),
+        // routeInformationParser: _appRouter.defaultRouteParser(),
+
+        // onGenerateInitialRoutes: (String initialRoute) {
+        //   return [AutoRoutePage<dynamic>(child: SplashScreen())];
+        // },
         title: kAppName,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

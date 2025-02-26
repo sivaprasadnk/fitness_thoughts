@@ -8,8 +8,11 @@ class HomeScreenNotifier extends StateNotifier<AsyncValue<List<BlogModel>>> {
 
   Future<void> loadBlogs() async {
     try {
+      if (state.value == null || state.value!.isEmpty) {
       final blogs = await locator<GetRecentPosts>().call(5);
       state = AsyncValue.data(blogs);
+
+      }
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
