@@ -11,11 +11,19 @@
             "type": "dart"
         },
         {
-            "name": "fitness_thoughts web",
+            "name": "web debug",
             "request": "launch",
             "type": "dart",
             "args": [
                 "-d", "chrome"
+            ]
+        },
+        {
+            "name": "web release",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d", "chrome", "--release"
             ]
         },
         {
