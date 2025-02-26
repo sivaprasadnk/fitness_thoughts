@@ -3,12 +3,15 @@ name: Build web
 on:
   push:
     branches:
-      - production_web  # Trigger this workflow on push to the main branch
+      - production_web
+
+permissions:
+  contents: write
 
 jobs:
   upload:
     name: Build web
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
