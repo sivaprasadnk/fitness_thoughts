@@ -32,5 +32,9 @@ jobs:
         name: Releases
         path: |
           build/web
-        # mappingFile: app/build/outputs/mapping/release/mapping.txt
-        # debugSymbols: app/intermediates/merged_native_libs/release/out/lib
+          
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages  
+        folder: build/web  
