@@ -17,13 +17,13 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.27.0'  # Use the version of Flutter you want
+        flutter-version: '3.29.0'  # Use the version of Flutter you want
 
     - name: Install dependencies
       run: flutter pub get  # Install Flutter dependencies
 
     - name: Build web
-      run: flutter build web  
+      run: flutter build web --wasm --no-tree-shake-icons
 
         #9 Upload Artifacts
     - name: Upload Artifacts
