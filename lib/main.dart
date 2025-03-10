@@ -8,8 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
-  setup();
   WidgetsFlutterBinding.ensureInitialized();
+  setup();
   // await locator<OpenLocaldb>().call();
   runApp(MyApp());
 }

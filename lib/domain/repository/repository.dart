@@ -9,4 +9,14 @@ abstract class Repository {
   // Future<SystemConfig> getLatestVersion();
   Future<SystemConfig> getSystemConfig();
   Future<Database> openLocalDatabase();
+  Future initiatePayment({
+    required int amount,
+    required String contact,
+    required String email,
+    required String key,
+    required String appName,
+    required String appDescription,
+    // required Function(String paymentId) onSuccess,
+    // required Function(String error) onFailure,
+  });
 }

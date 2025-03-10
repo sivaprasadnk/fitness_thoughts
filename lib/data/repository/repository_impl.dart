@@ -52,4 +52,35 @@ class RepositoryImpl extends Repository {
       return [];
     }
   }
+  
+  @override
+  Future initiatePayment({
+    required int amount,
+    required String contact,
+    required String email,
+    required String key,
+    required String appName,
+    required String appDescription,
+    // required Function(String paymentId) onSuccess,
+    // required Function(String error) onFailure,
+  }) async {
+    debugPrint("@@ repository");
+
+    try {
+      return await remoteDatasource.initiatePayment(
+        amount: amount,
+        contact: contact,
+        email: email,
+        appName: appName,
+        appDescription: appDescription,
+        key: key,
+        // onSuccess: onSuccess,
+        // onFailure: onFailure,
+      );
+    } catch (err) {
+      debugPrint("## error $err");
+    }
+  }
+  
+  
 }

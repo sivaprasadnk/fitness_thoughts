@@ -4,6 +4,10 @@ class SystemConfig {
   int? versionNumber;
   bool? isLatest;
   bool? showBiometrics;
+  String? appName;
+  String? testKey;
+  String? liveKey;
+  String? appDescription;
 
   SystemConfig({
     required this.buildNumber,
@@ -11,6 +15,10 @@ class SystemConfig {
     required this.isLatest,
     required this.versionNumber,
     this.showBiometrics,
+    this.appName,
+    this.liveKey,
+    this.testKey,
+    this.appDescription,
   });
 
   factory SystemConfig.fromJson(Map<String, dynamic> json) {
@@ -20,6 +28,10 @@ class SystemConfig {
       isLatest: json['is_latest'],
       versionNumber: json['version_number'],
       showBiometrics: json['show_biometrics'] ?? false,
+      appName: json['app_name'] ?? "",
+      appDescription: json['description'] ?? "",
+      testKey: json['test_key'] ?? "",
+      liveKey: json['live_key'] ?? "",
     );
   }
 }

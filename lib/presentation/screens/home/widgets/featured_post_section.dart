@@ -2,7 +2,9 @@
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/constants.dart';
+import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/core/utils/extensions/context_extensions.dart';
+import 'package:fitness_thoughts/domain/use_case/initiate_payment.dart';
 import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
 import 'package:fitness_thoughts/presentation/providers/system_config_provider.dart';
 import 'package:fitness_thoughts/presentation/screens/components/common_asset_image.dart';
@@ -149,14 +151,27 @@ class FeaturedPostSection extends StatelessWidget {
                         width: context.isLargeDevice ? 450 : double.infinity,
                       )
                     : GestureDetector(
-                        onTap: () {
-                          CommonFunctions.navigateToDetails(
-                            context: context,
-                            blog: blog,
-                            biometricsRequired:
-                                ref.read(systemConfigProvider).showBiometrics ??
-                                    false,
+                        onTap: () async {
+                          var config = ref.read(systemConfigProvider);
+
+                          await locator<InitiatePayment>().call(
+                            amount: 100,
+                            contact: '8086028340',
+                            email: 'sivaprasadnk123@gmail.com',
+                            key: kDebugMode ? config.testKey! : config.liveKey!,
+                            appName: config.appName!,
+                            appDescription: config.appDescription!,
                           );
+                          if (context.mounted) {
+                            CommonFunctions.navigateToDetails(
+                              context: context,
+                              blog: blog,
+                              biometricsRequired: ref
+                                      .read(systemConfigProvider)
+                                      .showBiometrics ??
+                                  false,
+                            );
+                          }
                         },
                         child: CommonNetworkImage(
                           imageUrl: blog.imageNetworkPath!,
@@ -213,13 +228,13 @@ class FeaturedPostSection extends StatelessWidget {
                 ReadMoreButton(
                   color: color,
                   callback: () {
-                    CommonFunctions.navigateToDetails(
-                      context: context,
-                      blog: blog,
-                      biometricsRequired:
-                          ref.read(systemConfigProvider).showBiometrics ??
-                              false,
-                    );
+                    // CommonFunctions.navigateToDetails(
+                    //   context: context,
+                    //   blog: blog,
+                    //   biometricsRequired:
+                    //       ref.read(systemConfigProvider).showBiometrics ??
+                    //           false,
+                    // );
                   },
                 ),
                 SizedBox(height: 30),

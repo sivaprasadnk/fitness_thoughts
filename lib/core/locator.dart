@@ -8,8 +8,10 @@ import 'package:fitness_thoughts/domain/use_case/get_post_details.dart';
 import 'package:fitness_thoughts/domain/use_case/get_posts.dart';
 import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
 import 'package:fitness_thoughts/domain/use_case/get_system_config.dart';
+import 'package:fitness_thoughts/domain/use_case/initiate_payment.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 // import 'package:http/http.dart' as http;
 
 final locator = GetIt.instance;
@@ -17,12 +19,14 @@ final locator = GetIt.instance;
 void setup() {
   // locator.registerSingleton<http.Client>(http.Client());
   locator.registerSingleton<Dio>(Dio());
+  locator.registerSingleton<Razorpay>(Razorpay());
   locator.registerSingleton<LocalAuthentication>(LocalAuthentication());
   locator.registerSingleton<Connectivity>(Connectivity());
   locator.registerSingleton<DioClient>(DioClient(locator(), locator()));
 
   locator
-      .registerSingleton<RemoteDatasourceImpl>(RemoteDatasourceImpl(locator()));
+      .registerSingleton<RemoteDatasourceImpl>(
+      RemoteDatasourceImpl(locator(), locator()));
   locator.registerSingleton<LocalDatasourceImpl>(LocalDatasourceImpl());
 
   locator
@@ -35,4 +39,5 @@ void setup() {
   // locator.registerSingleton<GetLatestVersionFromDb>(
   //     GetLatestVersionFromDb(locator()));
   locator.registerSingleton<GetSystemConfig>(GetSystemConfig(locator()));
+  locator.registerSingleton<InitiatePayment>(InitiatePayment(locator()));
 }
