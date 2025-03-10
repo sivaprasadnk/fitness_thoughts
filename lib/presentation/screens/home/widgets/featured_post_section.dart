@@ -27,7 +27,7 @@ class FeaturedPostSection extends StatelessWidget {
       // bloc: ,
       builder: (context, ref, _) {
         var blogs = ref.watch(homeScreenProvider).value;
-        if (blogs == null) {
+        if (blogs == null || blogs.isEmpty) {
           return SizedBox.shrink();
         }
         var blog = blogs.firstWhere((element) => element.isFeatured!);
