@@ -25,7 +25,7 @@ jobs:
       # 🧪 Run Unit Tests
       - name: Run Unit Tests
         run: |
-          flutter test/unit --coverage
+          flutter test $(find test/unit -name "*.dart") --coverage
           mkdir -p test-results/unit
           cp coverage/lcov.info test-results/unit/lcov.info
 
