@@ -28,9 +28,13 @@ jobs:
       # 🧪 Run Unit Tests
       - name: Run Unit Tests
         run: |
-          flutter test $(find test/unit -name "*.dart") --coverage
+          flutter test $(find test/unit -name "*.dart" ! -name "*.mocks.dart") --coverage
           mkdir -p test-results/unit
           cp coverage/lcov.info test-results/unit/lcov.info
+        shell: /bin/bash -e {0}
+        env:
+          FLUTTER_ROOT: /Users/runner/hostedtoolcache/flutter/stable-3.27.0-arm64
+          PUB_CACHE: /Users/runner/.pub-cache
 
       # 📤 Upload Unit Test Results
       - name: Upload Unit Test Results
