@@ -22,10 +22,10 @@ class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  ConsumerState<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends ConsumerState<SplashScreen> {
+class SplashScreenState extends ConsumerState<SplashScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
   late ConnectivityService _connectivityService;
@@ -39,6 +39,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       navigate(context);
     });
     super.initState();
+  }
+
+  void updateShowUpdateText({required bool value}) {
+    setState(() {
+      showUpdateText = value;
+    });
   }
 
   navigate(BuildContext context) async {
@@ -73,12 +79,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
       if (latest.buildNumber! > packageInfo.buildNumber.toInt()) {
         debugPrint("## newVersionAvailable!!");
-        showUpdateText = true;
+        updateShowUpdateText(value: true);
         setState(() {});
       } else {
         setState(() {});
         await ref.read(homeScreenProvider.notifier).loadBlogs();
-        showUpdateText = false;
+        updateShowUpdateText(value: false);
+
         if (context.mounted) {
           Navigator.pop(context);
           AutoRouter.of(context).replace(HomeRoute());
