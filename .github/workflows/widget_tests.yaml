@@ -26,7 +26,7 @@ jobs:
       # 🧩 Run Widget Tests
       - name: Run Widget Tests
         run: |
-          flutter test --coverage
+          flutter test/widget --coverage
           mkdir -p test-results/widget
           cp coverage/lcov.info test-results/widget/lcov.info
 
