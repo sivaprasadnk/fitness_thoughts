@@ -1,0 +1,38 @@
+name: Flutter Widget Tests
+
+on:
+
+  push:
+    branches:
+      - main
+
+jobs:
+  widget-test:
+    name: Run Flutter Widget Tests
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.0'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 🧩 Run Widget Tests
+      - name: Run Widget Tests
+        run: |
+          flutter test --coverage
+          mkdir -p test-results/widget
+          cp coverage/lcov.info test-results/widget/lcov.info
+
+      # 📤 Upload Widget Test Results
+      - name: Upload Widget Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: Widget Test Coverage Report
+          path: test-results/widget
