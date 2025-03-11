@@ -1,18 +1,26 @@
 import 'package:fitness_thoughts/core/locator.dart';
+import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/data/models/system_config_model.dart';
+import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
 import 'package:fitness_thoughts/domain/use_case/get_system_config.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockGetSystemConfig extends Mock implements GetSystemConfig {}
+import 'mock_get_recent_posts.mocks.dart';
+import 'mock_get_system_config.mocks.dart';
+
+
 
 void main() {
   late MockGetSystemConfig mockGetSystemConfig;
+  late MockGetRecentPosts mockGetRecentPosts;
 
   setUp(() async {
     mockGetSystemConfig = MockGetSystemConfig();
+    mockGetRecentPosts = MockGetRecentPosts();
 
     locator.registerLazySingleton<GetSystemConfig>(() => mockGetSystemConfig);
+    locator.registerLazySingleton<GetRecentPosts>(() => mockGetRecentPosts);
   });
 
   tearDown(() {
@@ -29,7 +37,9 @@ void main() {
       versionNumber: 100,
     );
 
-    when(mockGetSystemConfig.call()).thenAnswer((_) async => mockResult);
+    when(mockGetSystemConfig.call()).thenAnswer(
+      (_) async => mockResult,
+    );
 
     // Act
     final result = await locator<GetSystemConfig>().call();
@@ -55,4 +65,38 @@ void main() {
 
     verify(mockGetSystemConfig.call()).called(1);
   });
+
+  test('should handle successful GetRecentPosts call', () async {
+    // Arrange
+    final List<BlogModel> mockResult = [
+      BlogModel(
+        id: 1,
+        title: 'Hey',
+        subTitle: "Hello",
+        author: "",
+        imageAssetPath: "",
+        imageNetworkPath: "",
+        cacheKey: "",
+        content: "",
+        date: DateTime.now(),
+        dateString: "",
+        isActive: true,
+        isFeatured: true,
+        tags: [],
+      )
+    ];
+
+    when(mockGetRecentPosts.call(1)).thenAnswer(
+      (_) async => mockResult,
+    );
+
+    // Act
+    final result = await locator<GetRecentPosts>().call(1);
+
+    // Assert
+    expect(result.length, 1);
+    verify(mockGetRecentPosts.call(1)).called(1);
+  });
+
+
 }
