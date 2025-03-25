@@ -23,14 +23,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # 🧩 Run Widget Tests
+      #  Run Widget Tests
       - name: Run Widget Tests
         run: |
            flutter test $(find test/widget -name "*.dart") --coverage
           mkdir -p test-results/widget
           cp coverage/lcov.info test-results/widget/lcov.info
 
-      # 📤 Upload Widget Test Results
+      #  Upload Widget Test Results
       - name: Upload Widget Test Results
         uses: actions/upload-artifact@v4
         with:
