@@ -21,7 +21,6 @@ class FeaturedPostSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("## width :${context.screenWidth}");
     var width = context.screenWidth;
     var color = kCustomBlueColor;
     return Consumer(

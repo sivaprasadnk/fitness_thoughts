@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fitness_thoughts/core/app_version.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/connectivity_service.dart';
@@ -14,7 +15,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
@@ -68,8 +68,11 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
           });
     } else {
       // mainLogic({}, context);
-      PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      version = 'v${packageInfo.version}+${packageInfo.buildNumber}';
+      version = (await AppVersion.getVersion()) ?? "v1.0.0+1";
+      String buildNumber = version.split("+").last;
+      debugPrint("## current version $version");
+
+      // version = 'v${packageInfo.version}+${packageInfo.buildNumber}';
       setState(() {});
       var latest = await locator<GetSystemConfig>().call();
       ref.read(systemConfigProvider.notifier).loadSystemConfig(latest);
@@ -77,7 +80,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
       debugPrint("## latest ${latest.buildNumber}");
       debugPrint("## showBiometrics ${latest.showBiometrics}");
 
-      if (latest.buildNumber! > packageInfo.buildNumber.toInt()) {
+      if (latest.buildNumber! > buildNumber.toInt()) {
         debugPrint("## newVersionAvailable!!");
         updateShowUpdateText(value: true);
         setState(() {});

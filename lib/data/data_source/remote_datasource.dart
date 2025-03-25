@@ -54,7 +54,6 @@ final DioClient client;
     var blogs = (response.data as List)
         .map((e) => BlogModel.fromJson(e))
         .toList();
-    debugPrint("@@ blogs length :${blogs.length}");
     return blogs;
   }
   
