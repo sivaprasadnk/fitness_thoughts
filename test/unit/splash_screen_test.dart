@@ -37,33 +37,33 @@ void main() {
       versionNumber: 100,
     );
 
-    when(mockGetSystemConfig.call()).thenAnswer(
+    when(mockGetSystemConfig.call("")).thenAnswer(
       (_) async => mockResult,
     );
 
     // Act
-    final result = await locator<GetSystemConfig>().call();
+    final result = await locator<GetSystemConfig>().call("");
 
     // Assert
     expect(result.buildNumber, 2);
     expect(result.showBiometrics, true);
-    verify(mockGetSystemConfig.call()).called(1);
+    verify(mockGetSystemConfig.call("")).called(1);
   });
 
   test('should handle failure of GetSystemConfig call', () async {
     // Arrange
-    when(mockGetSystemConfig.call()).thenThrow(Exception('API Error'));
+    when(mockGetSystemConfig.call("")).thenThrow(Exception('API Error'));
 
     // Act
     try {
-      await locator<GetSystemConfig>().call();
+      await locator<GetSystemConfig>().call("");
       fail('Exception not thrown');
     } catch (e) {
       // Assert
       expect(e.toString(), contains('API Error'));
     }
 
-    verify(mockGetSystemConfig.call()).called(1);
+    verify(mockGetSystemConfig.call("")).called(1);
   });
 
   test('should handle successful GetRecentPosts call', () async {

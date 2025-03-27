@@ -20,9 +20,9 @@ class RepositoryImpl extends Repository {
   }
 
   @override
-  Future<SystemConfig> getSystemConfig() async {
+  Future<SystemConfig> getSystemConfig(String token) async {
     try {
-      return await remoteDatasource.getSystemConfig();
+      return await remoteDatasource.getSystemConfig(token);
     } catch (err) {
       return SystemConfig(
         id: 0,

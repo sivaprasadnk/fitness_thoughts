@@ -55,7 +55,7 @@ class MockGetSystemConfig extends _i1.Mock implements _i4.GetSystemConfig {
           as _i2.RepositoryImpl);
 
   @override
-  _i5.Future<_i3.SystemConfig> call() =>
+  _i5.Future<_i3.SystemConfig> call(String token) =>
       (super.noSuchMethod(
             Invocation.method(#call, []),
             returnValue: _i5.Future<_i3.SystemConfig>.value(

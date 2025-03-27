@@ -1,6 +1,8 @@
+import 'package:app_version_details/app_version_details.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:fitness_thoughts/core/app_version.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fitness_thoughts/core/common_colors.dart';
+import 'package:fitness_thoughts/core/common_functions.dart';
 import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/connectivity_service.dart';
 import 'package:fitness_thoughts/core/constants.dart';
@@ -10,12 +12,11 @@ import 'package:fitness_thoughts/core/utils/extensions/string_extensions.dart';
 import 'package:fitness_thoughts/domain/use_case/get_system_config.dart';
 import 'package:fitness_thoughts/presentation/providers/home_screen_provider.dart';
 import 'package:fitness_thoughts/presentation/providers/system_config_provider.dart';
+import 'package:fitness_thoughts/presentation/screens/splash_screen/update_available_text.dart';
 import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class SplashScreen extends ConsumerStatefulWidget {
@@ -27,7 +28,7 @@ class SplashScreen extends ConsumerStatefulWidget {
 
 class SplashScreenState extends ConsumerState<SplashScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
+      GlobalKey<ScaffoldMessengerState>();  
   late ConnectivityService _connectivityService;
   String version = "";
   bool? showUpdateText;
@@ -49,36 +50,16 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
 
   navigate(BuildContext context) async {
     if (kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
-      showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (_) {
-            return AlertDialog(
-              content: Text(
-                  'Download the app from PlayStore for the best experience !'),
-              actions: [
-                TextButton(
-                  onPressed: () async {
-                    await launchUrl(Uri.parse(playStoreUrl));
-                  },
-                  child: Text('Download now!'),
-                )
-              ],
-            );
-          });
+      CommonFunctions.showPlaystoreDownloadDialog(context: context);
     } else {
-      // mainLogic({}, context);
-      version = (await AppVersion.getVersion()) ?? "v1.0.0+1";
+      version = (await AppVersionDetails().getAppVersion()) ?? "v1.0.0+1";
       String buildNumber = version.split("+").last;
-      debugPrint("## current version $version");
-
-      // version = 'v${packageInfo.version}+${packageInfo.buildNumber}';
       setState(() {});
-      var latest = await locator<GetSystemConfig>().call();
+      var token = await FirebaseMessaging.instance.getToken() ?? "";
+      debugPrint("token ::$token");
+      var latest = await locator<GetSystemConfig>().call(token);
       ref.read(systemConfigProvider.notifier).loadSystemConfig(latest);
 
-      debugPrint("## latest ${latest.buildNumber}");
-      debugPrint("## showBiometrics ${latest.showBiometrics}");
 
       if (latest.buildNumber! > buildNumber.toInt()) {
         debugPrint("## newVersionAvailable!!");
@@ -92,9 +73,6 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
         if (context.mounted) {
           Navigator.pop(context);
           AutoRouter.of(context).replace(HomeRoute());
-
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
         }
       }
     }
@@ -131,34 +109,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
               ),
             ),
           ),
-          Center(
-            child: Visibility(
-              visible: showUpdateText != null && showUpdateText!,
-              child: GestureDetector(
-                onTap: () async {
-                  await launchUrl(Uri.parse(playStoreUrl));
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Update available. Click to update',
-                      style: TextStyle(
-                        color: kCustomBlueColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Icon(
-                      Icons.cloud_download,
-                      color: kCustomBlueColor,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
+          UpdateAvailableText(showUpdateText: showUpdateText),
         ],
       ),
     );

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "146587670167",
+    "project_id": "fitness-thoughts-bac27",
+    "storage_bucket": "fitness-thoughts-bac27.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146587670167:android:15faeeab04483fcea6fbd2",
+        "android_client_info": {
+          "package_name": "com.sptpra.fitness_thoughts"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRJolu3X2yAm-gGfrXqOEi9a9yRVAguBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fitness_thoughts/core/common_strings.dart';
 import 'package:fitness_thoughts/core/locator.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
 import 'package:fitness_thoughts/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CommonFunctions {
   static navigateToDetails({
@@ -74,5 +76,25 @@ class CommonFunctions {
         );
       },
     );
+  }
+
+  static showPlaystoreDownloadDialog({required BuildContext context}) async {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            content: Text(
+                'Download the app from PlayStore for the best experience !'),
+            actions: [
+              TextButton(
+                onPressed: () async {
+                  await launchUrl(Uri.parse(playStoreUrl));
+                },
+                child: Text('Download now!'),
+              )
+            ],
+          );
+        });
   }
 }

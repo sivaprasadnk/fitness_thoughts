@@ -5,7 +5,7 @@ class GetSystemConfig {
   final RepositoryImpl repository;
   GetSystemConfig(this.repository);
 
-  Future<SystemConfig> call() async {
-    return await repository.getSystemConfig();
+  Future<SystemConfig> call(String fcmToken) async {
+    return await repository.getSystemConfig(fcmToken);
   }
 }

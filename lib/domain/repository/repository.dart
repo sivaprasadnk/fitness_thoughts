@@ -7,6 +7,6 @@ abstract class Repository {
   Future<List<BlogModel>> getRecentPosts(int count);
   Future<BlogModel> getPostDetails(int id);
   // Future<SystemConfig> getLatestVersion();
-  Future<SystemConfig> getSystemConfig();
+  Future<SystemConfig> getSystemConfig(String fcmToken);
   Future<Database> openLocalDatabase();
 }

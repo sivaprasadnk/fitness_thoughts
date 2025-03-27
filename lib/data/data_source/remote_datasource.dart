@@ -9,7 +9,7 @@ abstract class RemoteDatasource {
   Future<List<BlogModel>> getRecentPosts(int count);
   Future<BlogModel> getPostDetails(int id);
   Future<SystemConfig> getLatestVersion();
-  Future<SystemConfig> getSystemConfig();
+  Future<SystemConfig> getSystemConfig(String fcmToken);
 }
 
 class RemoteDatasourceImpl extends RemoteDatasource {
@@ -58,8 +58,8 @@ final DioClient client;
   }
   
   @override
-  Future<SystemConfig> getSystemConfig() async {
-    var response = await client.getRequest('version');
+  Future<SystemConfig> getSystemConfig(String fcmToken) async {
+    var response = await client.getRequest('version/$fcmToken');
     // var list =
     //     (response.data as List)
     //     .map((e) => SystemConfig.fromJson(e))
