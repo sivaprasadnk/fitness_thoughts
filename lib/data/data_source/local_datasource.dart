@@ -1,14 +1,20 @@
+import 'package:fitness_thoughts/core/constants.dart';
 import 'package:fitness_thoughts/data/models/blog_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class LocalDatasource {
+  Future addVersionToDb(String version);
+  Future<String> readVersionFromDb();
   Future<Database> openLocalDatabase();
   Future<void> insertBlogs(List<BlogModel> blogs);
   Future<List<BlogModel>> getBlogs();
 }
 
 class LocalDatasourceImpl extends LocalDatasource {
+  final FlutterSecureStorage secureStorage;
+  LocalDatasourceImpl(this.secureStorage);
   @override
   Future<Database> openLocalDatabase() async {
     return await openDatabase(
@@ -61,5 +67,15 @@ class LocalDatasourceImpl extends LocalDatasource {
           dateString: dateString,
         ),
     ];
+  }
+  
+  @override
+  Future addVersionToDb(String version) async {
+    return await secureStorage.write(key: kVersionKey, value: version);
+  }
+
+  @override
+  Future<String> readVersionFromDb() async {
+    return await secureStorage.read(key: kVersionKey) ?? "";
   }
 }

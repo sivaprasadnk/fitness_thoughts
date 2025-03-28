@@ -55,6 +55,7 @@ dependencies:
   firebase_core: ^3.12.1
   firebase_messaging: ^15.2.4
   app_version_details: ^1.0.0
+  flutter_secure_storage: ^9.2.4
   # mocktail: ^1.0.4
   # flutter_launcher_icons: ^0.14.2
   # path_provider: ^2.1.5

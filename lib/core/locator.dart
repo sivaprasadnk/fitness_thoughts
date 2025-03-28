@@ -8,6 +8,7 @@ import 'package:fitness_thoughts/domain/use_case/get_post_details.dart';
 import 'package:fitness_thoughts/domain/use_case/get_posts.dart';
 import 'package:fitness_thoughts/domain/use_case/get_recent_posts.dart';
 import 'package:fitness_thoughts/domain/use_case/get_system_config.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:local_auth/local_auth.dart';
 // import 'package:http/http.dart' as http;
@@ -17,13 +18,15 @@ final locator = GetIt.instance;
 void setup() {
   // locator.registerSingleton<http.Client>(http.Client());
   locator.registerSingleton<Dio>(Dio());
+  locator.registerSingleton<FlutterSecureStorage>(FlutterSecureStorage());
   locator.registerSingleton<LocalAuthentication>(LocalAuthentication());
   locator.registerSingleton<Connectivity>(Connectivity());
   locator.registerSingleton<DioClient>(DioClient(locator(), locator()));
 
   locator
       .registerSingleton<RemoteDatasourceImpl>(RemoteDatasourceImpl(locator()));
-  locator.registerSingleton<LocalDatasourceImpl>(LocalDatasourceImpl());
+  locator
+      .registerSingleton<LocalDatasourceImpl>(LocalDatasourceImpl(locator()));
 
   locator
       .registerSingleton<RepositoryImpl>(RepositoryImpl(locator(), locator()));

@@ -3,6 +3,9 @@
 const int mobileBreakPoint = 695;
 
 const double defaultBorderRadius = 8;
+
+const kVersionKey = "version";  
+
 // var image = 'https://i.postimg.cc/Y0CzcMXJ/image1.jpg';
 var image =
     'https://firebasestorage.googleapis.com/v0/b/fitness-thoughts-bac27.firebasestorage.app/o/image1.jpg?alt=media&token=f85eaabd-609e-41dc-8d74-b65aaac6100a';
